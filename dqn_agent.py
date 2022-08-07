@@ -9,8 +9,9 @@ ckpt = 'dqn_agent'
 env = gym.make('parking_env-v0', render=False, multi_obs=False)
 env.reset()
 
-model = DQN('MlpPolicy', env, verbose=1)
-model.learn(total_timesteps=int(5e6))
+total_timesteps = int(5e6)
+model = DQN('MlpPolicy', env, verbose=1, seed=0, tensorboard_log='log')
+model.learn(total_timesteps=total_timesteps)
 model.save(ckpt)
 del model
 
