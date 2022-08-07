@@ -27,26 +27,25 @@ class CustomEnv(gym.GoalEnv):
             - seed() -- Returns the seed for the environment
             - close() -- Close the environment
         """
-        self.car = None
-        self.done = False
-        self.vector = None
-        self.goal = None
-        self.desired_goal = None
-
-        if render:
-            self.client = p.connect(p.GUI)
-            time.sleep(1. / 240.)
-        else:
-            self.client = p.connect(p.DIRECT)
-            time.sleep(1. / 240.)
-
-        p.setAdditionalSearchPath(pybullet_data.getDataPath())
-        p.setGravity(0, 0, -10)
-
-        self.theta = 0
 
         self.base_path = base_path
         self.car_type = car_type
+        self.manual = manual
+        self.multi_obs = multi_obs
+        self.mode = mode
+        assert self.mode in ['1', '2', '3', '4', '5']
+
+        self.car = None
+        self.done = False
+        self.goal = None
+        self.desired_goal = None
+
+        self.ground = None
+        self.left_wall = None
+        self.right_wall = None
+        self.front_wall = None
+        self.parked_car1 = None
+        self.parked_car2 = None
 
         # 定义状态空间
         obs_low = np.array([0, 0, -1, -1, -1, -1])
@@ -61,19 +60,28 @@ class CustomEnv(gym.GoalEnv):
             )
         else:
             self.observation_space = spaces.Box(low=obs_low, high=obs_high, dtype=np.float32)
+
         # 定义动作空间
         self.action_space = spaces.Discrete(4)  # 4种动作：前进、后退、左转、右转
 
         # self.reward_weights = np.array([1, 0.3, 0, 0, 0.02, 0.02])
         self.reward_weights = np.array([1, 0.3, 0, 0, 0.1, 0.1])
-        self.heading = None
+        self.target_orientation = None
+        self.start_orientation = None
 
         self.step_cnt = 0
         self.step_threshold = 500
-        self.manual = manual
-        self.multi_obs = multi_obs
-        self.mode = mode
-        assert self.mode in ['1', '2', '3', '4', '5']
+
+        if render:
+            self.client = p.connect(p.GUI)
+            time.sleep(1. / 240.)
+        else:
+            self.client = p.connect(p.DIRECT)
+            time.sleep(1. / 240.)
+        p.setAdditionalSearchPath(pybullet_data.getDataPath())
+        p.setGravity(0, 0, -10)
+
+        self.reset()
 
     def render(self, mode='human'):
         """
@@ -160,19 +168,27 @@ class CustomEnv(gym.GoalEnv):
         #
 
         if self.mode == '1':
-            self.heading = np.pi * 3 / 2
             self.goal = np.array([3.8 / 2, 4.2 / 2])
             self.start_orientation = [0, 0, np.pi * 3 / 2]
+            self.target_orientation = np.pi * 3 / 2
         elif self.mode == '2':
-            self.heading = np.pi * 3 / 2
             self.goal = np.array([3.8 / 2, 4.2 / 2])
             self.start_orientation = [0, 0, np.pi * 2 / 2]
+            self.target_orientation = np.pi * 3 / 2
         elif self.mode == '3':
-            self.heading = np.pi * 3 / 2
             self.goal = np.array([-3.8 / 2, 4.2 / 2])
             self.start_orientation = [0, 0, np.pi * 4 / 2]
+            self.target_orientation = np.pi * 3 / 2
+        elif self.mode == '4':
+            self.goal = np.array([0.0 / 2, 0.0 / 2])
+            self.start_orientation = [0, 0, np.pi * 0 / 2]
+            self.target_orientation = np.pi * 0 / 2
+        elif self.mode == '5':
+            self.goal = np.array([0.0 / 2, 0.0 / 2])
+            self.start_orientation = [0, 0, np.pi * 2 / 2]
+            self.target_orientation = np.pi * 2 / 3
 
-        self.desired_goal = np.array([self.goal[0], self.goal[1], 0.0, 0.0, np.cos(self.heading), np.sin(self.heading)])
+        self.desired_goal = np.array([self.goal[0], self.goal[1], 0.0, 0.0, np.cos(self.target_orientation), np.sin(self.target_orientation)])
 
         # Reload the plane and car
         # basePosition = [np.random.rand() * 3 + 2, np.random.rand() * 8 + 1, 0.2]
