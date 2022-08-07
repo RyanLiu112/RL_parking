@@ -29,7 +29,7 @@ class CustomEnv(gym.GoalEnv):
         """
         self.car = None
         self.done = False
-        self.vector = np.pi / 2 * 3
+        self.vector = None
         self.goal = None
         self.desired_goal = None
 
