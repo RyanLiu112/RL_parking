@@ -1,4 +1,3 @@
-import math
 import os
 import random
 import time
@@ -138,35 +137,35 @@ class CustomEnv(gym.GoalEnv):
         p.addUserDebugLine([2.4, 2.7, 0.02], [1.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
         p.addUserDebugLine([2.4, 2.7, 0.02], [2.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
 
-        # 左上车位线
-        p.addUserDebugLine([-0.5, 1.5, 0.02], [-3.2, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-0.5, 2.7, 0.02], [-3.2, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-0.5, 2.7, 0.02], [-0.5, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-1.4, 2.7, 0.02], [-1.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-2.3, 2.7, 0.02], [-2.3, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-3.2, 2.7, 0.02], [-3.2, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-
-        # 左下车位线
-        p.addUserDebugLine([-1.5, -1.5, 0.02], [-2.7, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-1.5, -1.5, 0.02], [-1.5, -2.4, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-2.7, -2.4, 0.02], [-2.7, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([-2.7, -2.4, 0.02], [-1.5, -2.4, 0.02], [0.98, 0.98, 0.98], 2.5)
-
-        # 右下车位线
-        p.addUserDebugLine([2, -1.5, 0.02], [2.9, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([2, -1.5, 0.02], [2.3, -3.04, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([3.2, -3.04, 0.02], [2.9, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([3.2, -3.04, 0.02], [2.3, -3.04, 0.02], [0.98, 0.98, 0.98], 2.5)
-
-        self.parked_car1 = p.loadURDF("husky/husky.urdf", basePosition=[-0.95, 2.1, 0.03], baseOrientation=p.getQuaternionFromEuler([0, 0, math.pi / 2]), useFixedBase=True)
-        self.parked_car2 = p.loadURDF("husky/husky.urdf", basePosition=[-2.75, 2.1, 0.03], baseOrientation=p.getQuaternionFromEuler([0, 0, math.pi / 2]), useFixedBase=True)
+        # # 左上车位线
+        # p.addUserDebugLine([-0.5, 1.5, 0.02], [-3.2, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-0.5, 2.7, 0.02], [-3.2, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-0.5, 2.7, 0.02], [-0.5, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-1.4, 2.7, 0.02], [-1.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-2.3, 2.7, 0.02], [-2.3, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-3.2, 2.7, 0.02], [-3.2, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        #
+        # # 左下车位线
+        # p.addUserDebugLine([-1.5, -1.5, 0.02], [-2.7, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-1.5, -1.5, 0.02], [-1.5, -2.4, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-2.7, -2.4, 0.02], [-2.7, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-2.7, -2.4, 0.02], [-1.5, -2.4, 0.02], [0.98, 0.98, 0.98], 2.5)
+        #
+        # # 右下车位线
+        # p.addUserDebugLine([2, -1.5, 0.02], [2.9, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([2, -1.5, 0.02], [2.3, -3.04, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([3.2, -3.04, 0.02], [2.9, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([3.2, -3.04, 0.02], [2.3, -3.04, 0.02], [0.98, 0.98, 0.98], 2.5)
+        #
+        # self.parked_car1 = p.loadURDF("husky/husky.urdf", basePosition=[-0.95, 2.1, 0.03], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
+        # self.parked_car2 = p.loadURDF("husky/husky.urdf", basePosition=[-2.75, 2.1, 0.03], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
 
         self.goal = np.array([3.8 / 2, 4.2 / 2])
         self.desired_goal = np.array([self.goal[0], self.goal[1], 0.0, 0.0, np.cos(self.heading), np.sin(self.heading)])
 
         # Reload the plane and car
         # basePosition = [np.random.rand() * 3 + 2, np.random.rand() * 8 + 1, 0.2]
-        baseOrientationEuler = [0, 0, np.pi * 3 / 2]
+        baseOrientationEuler = [0, 0, np.pi * 2 / 2]
         self.t = Car(self.client, baseOrientationEuler=baseOrientationEuler, carType=self.car_type)
         self.car = self.t.car
 
@@ -244,8 +243,10 @@ class CustomEnv(gym.GoalEnv):
 
         # Condition for done
         self.done = False
+        self.success = False
         # if np.sum(abs(pos - slot_center)) < 0.8:  # and abs(self.vector - target_vector) < 0.1:
         if distance < 0.1:
+            self.success = True
             self.done = True
 
         self.step_cnt += 1
@@ -262,13 +263,15 @@ class CustomEnv(gym.GoalEnv):
 
         observation = np.array(list(car_ob))
         if self.multi_obs:
-            observation_dict = {
+            observation = {
                 'observation': observation,
                 'achieved_goal': observation,
                 'desired_goal': self.desired_goal
             }
 
-        return observation, reward, self.done, dict()
+        info = {'is_success': self.success}
+
+        return observation, reward, self.done, info
 
     def seed(self, seed=None):
         """Getting the seed of the environment"""
