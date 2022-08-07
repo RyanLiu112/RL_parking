@@ -12,7 +12,7 @@ from gym import spaces
 class CustomEnv(gym.GoalEnv):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, render=False, base_path=os.getcwd(), car_type='husky', discrete=True, multi_obs=False, manual=False):
+    def __init__(self, render=False, base_path=os.getcwd(), car_type='husky', mode='1', manual=False, multi_obs=False):
         """Inherited from gym.Env
 
         Arguments:\n
@@ -62,20 +62,18 @@ class CustomEnv(gym.GoalEnv):
         else:
             self.observation_space = spaces.Box(low=obs_low, high=obs_high, dtype=np.float32)
         # 定义动作空间
-        if discrete:
-            self.action_space = spaces.Discrete(4)  # 4种动作：前进、后退、左转、右转
-        else:
-            self.action_space = spaces.Box(low=np.array([-1, -1]), high=np.array([1, 1]), dtype=np.float32)
+        self.action_space = spaces.Discrete(4)  # 4种动作：前进、后退、左转、右转
+
         # self.reward_weights = np.array([1, 0.3, 0, 0, 0.02, 0.02])
         self.reward_weights = np.array([1, 0.3, 0, 0, 0.1, 0.1])
-        self.heading = 0.0
+        self.heading = None
 
         self.step_cnt = 0
         self.step_threshold = 500
         self.manual = manual
-        self.discrete = discrete
         self.multi_obs = multi_obs
-        self.modes = ['left_up', 'right_up', 'left_down', 'right_down']
+        self.mode = mode
+        assert self.mode in ['1', '2', '3', '4', '5']
 
     def render(self, mode='human'):
         """
@@ -104,14 +102,16 @@ class CustomEnv(gym.GoalEnv):
         p.addUserDebugLine([3.5, 3.5, 0.02], [3.5, -3.5, 0.02], [0.75, 0.75, 0.75], 5)
         p.addUserDebugLine([3.5, 3.5, 0.02], [-3.5, 3.5, 0.02], [0.75, 0.75, 0.75], 5)
         # Loading Boundaries
-        self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[1.25, 2.1, 0.03], useFixedBase=10)
-        self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[2.55, 2.1, 0.03], useFixedBase=10)
-        self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_ru.urdf"), basePosition=[1.9, 2.8, 0.03], useFixedBase=10)
+        # self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[1.25, 2.1, 0.03], useFixedBase=10)
+        # self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[2.55, 2.1, 0.03], useFixedBase=10)
+        # self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_ru.urdf"), basePosition=[1.9, 2.8, 0.03], useFixedBase=10)
 
-        # p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-0.4, 2.1, 0.03], useFixedBase=10)
-        # p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-3.3, 2.1, 0.03], useFixedBase=10)
-        # p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_lu.urdf"), basePosition=[-1.975, 2.8, 0.03], useFixedBase=10)
-        #
+        self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-0.3, 2.1, 0.03], useFixedBase=10)
+        self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-3.5, 2.1, 0.03], useFixedBase=10)
+        self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_lu.urdf"), basePosition=[-1.9, 2.8, 0.03], useFixedBase=10)
+        self.parked_car1 = p.loadURDF("husky/husky.urdf", basePosition=[-0.9, 2.1, 0.0], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
+        self.parked_car2 = p.loadURDF("husky/husky.urdf", basePosition=[-2.9, 2.1, 0.0], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
+
         # p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-0.8, -1.95, 0.03],
         #            useFixedBase=10)
         # p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-2.8, -1.95, 0.03],
@@ -132,18 +132,19 @@ class CustomEnv(gym.GoalEnv):
         # p.addUserDebugLine([0.2, 0.2, 0.02], [0.2, -0.2, 0.02], [0.98, 0.98, 0.98], 2.5)
 
         # 右上车位线
-        p.addUserDebugLine([1.4, 1.5, 0.02], [1.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([1.4, 1.5, 0.02], [2.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([2.4, 2.7, 0.02], [1.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
-        p.addUserDebugLine([2.4, 2.7, 0.02], [2.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([1.4, 1.5, 0.02], [1.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([1.4, 1.5, 0.02], [2.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([2.4, 2.7, 0.02], [1.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([2.4, 2.7, 0.02], [2.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
 
         # # 左上车位线
-        # p.addUserDebugLine([-0.5, 1.5, 0.02], [-3.2, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-0.5, 2.7, 0.02], [-3.2, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-0.5, 2.7, 0.02], [-0.5, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-1.4, 2.7, 0.02], [-1.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-2.3, 2.7, 0.02], [-2.3, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-3.2, 2.7, 0.02], [-3.2, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([-0.4, 1.5, 0.02], [-3.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([-0.4, 2.7, 0.02], [-3.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([-0.4, 1.5, 0.02], [-0.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([-1.4, 1.5, 0.02], [-1.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([-2.4, 1.5, 0.02], [-2.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([-3.4, 1.5, 0.02], [-3.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
+
         #
         # # 左下车位线
         # p.addUserDebugLine([-1.5, -1.5, 0.02], [-2.7, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
@@ -157,16 +158,25 @@ class CustomEnv(gym.GoalEnv):
         # p.addUserDebugLine([3.2, -3.04, 0.02], [2.9, -1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
         # p.addUserDebugLine([3.2, -3.04, 0.02], [2.3, -3.04, 0.02], [0.98, 0.98, 0.98], 2.5)
         #
-        # self.parked_car1 = p.loadURDF("husky/husky.urdf", basePosition=[-0.95, 2.1, 0.03], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
-        # self.parked_car2 = p.loadURDF("husky/husky.urdf", basePosition=[-2.75, 2.1, 0.03], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
 
-        self.goal = np.array([3.8 / 2, 4.2 / 2])
+        if self.mode == '1':
+            self.heading = np.pi * 3 / 2
+            self.goal = np.array([3.8 / 2, 4.2 / 2])
+            self.start_orientation = [0, 0, np.pi * 3 / 2]
+        elif self.mode == '2':
+            self.heading = np.pi * 3 / 2
+            self.goal = np.array([3.8 / 2, 4.2 / 2])
+            self.start_orientation = [0, 0, np.pi * 2 / 2]
+        elif self.mode == '3':
+            self.heading = np.pi * 3 / 2
+            self.goal = np.array([-3.8 / 2, 4.2 / 2])
+            self.start_orientation = [0, 0, np.pi * 4 / 2]
+
         self.desired_goal = np.array([self.goal[0], self.goal[1], 0.0, 0.0, np.cos(self.heading), np.sin(self.heading)])
 
         # Reload the plane and car
         # basePosition = [np.random.rand() * 3 + 2, np.random.rand() * 8 + 1, 0.2]
-        baseOrientationEuler = [0, 0, np.pi * 2 / 2]
-        self.t = Car(self.client, baseOrientationEuler=baseOrientationEuler, carType=self.car_type)
+        self.t = Car(self.client, baseOrientationEuler=self.start_orientation, carType=self.car_type)
         self.car = self.t.car
 
         # Get observation to return
@@ -208,6 +218,11 @@ class CustomEnv(gym.GoalEnv):
         # print(f'p1: {points1}, p2: {points2}, p3: {points3}')
         if len(points1) or len(points2) or len(points3):
             done = True
+        if self.mode == '3':
+            points4 = p.getContactPoints(self.car, self.parked_car1)
+            points5 = p.getContactPoints(self.car, self.parked_car2)
+            if len(points4) or len(points5):
+                done = True
         return done
 
     def step(self, action):
@@ -224,7 +239,7 @@ class CustomEnv(gym.GoalEnv):
             - info -- Additional Information
         """
         # Feed action to the car and get observation of car's state
-        self.t.apply_action(action, discrete=self.discrete)
+        self.t.apply_action(action)
         p.stepSimulation()
         car_ob, self.vector = self.t.get_observation()
 
@@ -252,10 +267,12 @@ class CustomEnv(gym.GoalEnv):
         self.step_cnt += 1
         if self.step_cnt > self.step_threshold:  # 限制episode长度为step_threshold
             self.done = True
-        if car_ob[2] < -0.5:  # 小车掉出环境
+        if car_ob[2] < -2:  # 小车掉出环境
+            # print('done! out')
             reward = -500
             self.done = True
         if self.judge_collision():  # 碰撞
+            # print('done! collision')
             reward = -500
             self.done = True
         if self.done:
@@ -299,52 +316,50 @@ class Car:
     def get_ids(self):
         return self.car, self.client
 
-    def apply_action(self, action, discrete=True):
-        if discrete:
-            # Expects action to be two-dimensional
-            velocity = self.max_velocity  # rad/s
-            force = self.max_force  # Newton
+    def apply_action(self, action):
+        velocity = self.max_velocity  # rad/s
+        force = self.max_force  # Newton
 
-            if action == 0:  # forward
-                for i in range(5):
-                    for joint in range(2, 6):
-                        p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=velocity, force=force)
-                    p.stepSimulation()
-            elif action == 1:  # back
-                for i in range(5):
-                    for joint in range(2, 6):
-                        p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=-velocity, force=force)
-                    p.stepSimulation()
-            elif action == 2:  # left
-                targetVel = 3
-                for i in range(5):
-                    for joint in range(2, 6):
-                        for joint in range(1, 3):
-                            p.setJointMotorControl2(self.car, 2 * joint + 1, p.VELOCITY_CONTROL,
-                                                    targetVelocity=targetVel, force=force)
-                        for joint in range(1, 3):
-                            p.setJointMotorControl2(self.car, 2 * joint, p.VELOCITY_CONTROL, targetVelocity=-targetVel,
-                                                    force=force)
-                        p.stepSimulation()
-            elif action == 3:  # right
-                targetVel = 3
-                for i in range(5):
-                    for joint in range(2, 6):
-                        for joint in range(1, 3):
-                            p.setJointMotorControl2(self.car, 2 * joint, p.VELOCITY_CONTROL, targetVelocity=targetVel,
-                                                    force=force)
-                        for joint in range(1, 3):
-                            p.setJointMotorControl2(self.car, 2 * joint + 1, p.VELOCITY_CONTROL,
-                                                    targetVelocity=-targetVel, force=force)
-                        p.stepSimulation()
-            elif action == 4:  # stop
-                targetVel = 0
+        if action == 0:  # forward
+            for i in range(5):
                 for joint in range(2, 6):
-                    p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=targetVel,
-                                            force=force)
+                    p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=velocity, force=force)
                 p.stepSimulation()
-            else:
-                raise ValueError
+        elif action == 1:  # back
+            for i in range(5):
+                for joint in range(2, 6):
+                    p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=-velocity, force=force)
+                p.stepSimulation()
+        elif action == 2:  # left
+            targetVel = 3
+            for i in range(5):
+                for joint in range(2, 6):
+                    for joint in range(1, 3):
+                        p.setJointMotorControl2(self.car, 2 * joint + 1, p.VELOCITY_CONTROL,
+                                                targetVelocity=targetVel, force=force)
+                    for joint in range(1, 3):
+                        p.setJointMotorControl2(self.car, 2 * joint, p.VELOCITY_CONTROL, targetVelocity=-targetVel,
+                                                force=force)
+                    p.stepSimulation()
+        elif action == 3:  # right
+            targetVel = 3
+            for i in range(5):
+                for joint in range(2, 6):
+                    for joint in range(1, 3):
+                        p.setJointMotorControl2(self.car, 2 * joint, p.VELOCITY_CONTROL, targetVelocity=targetVel,
+                                                force=force)
+                    for joint in range(1, 3):
+                        p.setJointMotorControl2(self.car, 2 * joint + 1, p.VELOCITY_CONTROL,
+                                                targetVelocity=-targetVel, force=force)
+                    p.stepSimulation()
+        elif action == 4:  # stop
+            targetVel = 0
+            for joint in range(2, 6):
+                p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=targetVel,
+                                        force=force)
+            p.stepSimulation()
+        else:
+            raise ValueError
 
     def get_observation(self):
         position, angle = p.getBasePositionAndOrientation(self.car)  # 获取小车位姿
