@@ -5,22 +5,22 @@ from stable_baselines3.common.evaluation import evaluate_policy
 
 
 ckpt = 'dqn_agent'
+
 env = gym.make('parking_env-v0', render=False, multi_obs=False)
 env.reset()
 
 model = DQN('MlpPolicy', env, verbose=1)
-model.learn(total_timesteps=int(1e6))
-
+model.learn(total_timesteps=int(5e6))
 model.save(ckpt)
 del model
 
-model = DQN.load(ckpt, env=env, print_system_info=True)
-mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
-print(f'mean reward: {mean_reward}, std reward: {std_reward}')
 
 # Evaluation
 env = gym.make('parking_env-v0', render=True, multi_obs=False)
 obs = env.reset()
+model = DQN.load(ckpt, env=env, print_system_info=True)
+# mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
+# print(f'mean reward: {mean_reward}, std reward: {std_reward}')
 
 episode_return = 0
 for i in range(1000):
