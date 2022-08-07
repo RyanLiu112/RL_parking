@@ -5,6 +5,7 @@ import os.path
 import gym
 import parking_env
 from stable_baselines3 import DQN
+from stable_baselines3.common.vec_env.dummy_vec_env import DummyVecEnv
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.logger import configure
@@ -17,22 +18,24 @@ parser.add_argument('--seed', type=int, default=0, metavar='N', help='random see
 parser.add_argument('--total_timesteps', type=int, default=int(5e6), help='total timesteps to run')
 parser.add_argument('--save_freq', type=int, default=int(1e6), help='checkpoint save frequency')
 parser.add_argument('--log_path', type=str, default='./log', help='logging path')
-parser.add_argument('--ckpt_path', type=str, default='dqn_agent', help='checkpoint path')
-parser.add_argument('--mode', type=str, default='2', choices=['1', '2', '3', '4', '5'], help='mode')
+parser.add_argument('--ckpt_path', type=str, default='', help='checkpoint path')
+parser.add_argument('--mode', type=str, default='3', choices=['1', '2', '3', '4', '5'], help='mode')
 
 
 args = parser.parse_args()
 date = datetime.datetime.strftime(datetime.datetime.now(), '%m%d')
 args.log_path = os.path.join(args.log_path, f'DQN_{args.mode}_{date}')
-args.ckpt_path = os.path.join(args.log_path, f'DQN_{args.mode}_{date}/dqn_agent')
+# args.ckpt_path = 'log/rl_model_1000000_steps'
+if not args.ckpt_path:
+    args.ckpt_path = os.path.join(args.log_path, f'DQN_{args.mode}_{date}/dqn_agent')
 
-env = gym.make(args.env, render=args.render)
-env.reset()
+env = gym.make(args.env, render=args.render, mode=args.mode)
+env = DummyVecEnv([lambda: env])
 
 model = DQN('MlpPolicy', env, verbose=1, seed=args.seed)
 logger = configure(args.log_path, ["stdout", "csv", "tensorboard"])
 model.set_logger(logger)
-checkpoint_callback = CheckpointCallback(save_freq=args.save_freq, save_path=args.log_path, name_prefix='rl_model')
+checkpoint_callback = CheckpointCallback(save_freq=args.save_freq, save_path=args.log_path, name_prefix='dqn_agent')
 model.learn(total_timesteps=args.total_timesteps, callback=checkpoint_callback)
 model.save(args.ckpt_path)
 del model
