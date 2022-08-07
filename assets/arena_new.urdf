@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!-- created with Phobos 1.0.1 "Capricious Choutengan" -->
+  <robot name="arena">
+
+    <link name="arena_base">
+      <inertial>
+      <contact>
+        <lateral_friction value="1"/>
+      </contact>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.01"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.0027"/></inertial>
+      <visual name="Cube">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="8 8 0.01"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <box size="8 8 0.01"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <material name="black">
+      <color rgba="0.29 0.286 0.278 1.0"/>
+    </material>
+
+  </robot>
