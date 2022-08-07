@@ -2,7 +2,7 @@ import gym
 import parking_env
 import pybullet as p
 
-env = gym.make("parking_env-v0", render=True, manual=True)
+env = gym.make("parking_env-v0", render=True, manual=True, mode='3')
 env.reset()
 
 done = False
