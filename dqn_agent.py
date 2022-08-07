@@ -5,7 +5,6 @@ import os
 import gym
 import parking_env
 from stable_baselines3 import DQN
-from stable_baselines3.common.vec_env.dummy_vec_env import DummyVecEnv
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.logger import configure
@@ -16,7 +15,7 @@ parser.add_argument('--env', type=str, default="parking_env-v0", help='name of t
 parser.add_argument('--render', type=bool, default=False, help='render the environment')
 parser.add_argument('--seed', type=int, default=0, metavar='N', help='random seed (default: 0)')
 parser.add_argument('--total_timesteps', type=int, default=int(5e6), help='total timesteps to run')
-parser.add_argument('--save_freq', type=int, default=int(1e6), help='checkpoint save frequency')
+parser.add_argument('--save_freq', type=int, default=int(1e5), help='checkpoint save frequency')
 parser.add_argument('--log_path', type=str, default='./log', help='logging path')
 parser.add_argument('--ckpt_path', type=str, default='', help='checkpoint path')
 parser.add_argument('--mode', type=str, default='3', choices=['1', '2', '3', '4', '5'], help='mode')
@@ -25,12 +24,12 @@ args = parser.parse_args()
 
 time = datetime.datetime.strftime(datetime.datetime.now(), '%m%d_%H%M')
 args.log_path = os.path.join(args.log_path, f'DQN_{args.mode}_{time}')
-# args.ckpt_path = 'log/rl_model_1000000_steps'
+# args.ckpt_path = 'log/DQN_3_0807/dqn_agent_1000000_steps'
 if not args.ckpt_path:
     args.ckpt_path = os.path.join(args.log_path, f'DQN_{args.mode}_{time}/dqn_agent')
 
 env = gym.make(args.env, render=args.render, mode=args.mode)
-env = DummyVecEnv([lambda: env])
+env.reset()
 
 model = DQN('MlpPolicy', env, verbose=1, seed=args.seed)
 logger = configure(args.log_path, ["stdout", "csv", "tensorboard"])
