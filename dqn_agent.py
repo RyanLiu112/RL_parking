@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--env', type=str, default="parking_env-v0", help='name of the environment to run')
 parser.add_argument('--render', type=bool, default=False, help='render the environment')
 parser.add_argument('--seed', type=int, default=0, metavar='N', help='random seed (default: 0)')
-parser.add_argument('--total_timesteps', type=int, default=int(5e6), help='total timesteps to run')
+parser.add_argument('--total_timesteps', type=int, default=int(2e6), help='total timesteps to run')
 parser.add_argument('--save_freq', type=int, default=int(5e5), help='checkpoint save frequency')
 parser.add_argument('--log_path', type=str, default='./log', help='logging path')
 parser.add_argument('--ckpt_path', type=str, default='', help='checkpoint path')
@@ -41,7 +41,7 @@ del model
 
 
 # Evaluation
-env = gym.make(args.env, render=True)
+env = gym.make(args.env, render=True, mode=args.mode)
 obs = env.reset()
 model = DQN.load(args.ckpt_path, env=env, print_system_info=True)
 # mean_reward, std_reward = evaluate_policy(model, model.get_env(), n_eval_episodes=10)
