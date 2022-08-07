@@ -2,3 +2,4 @@
 .DS_Store
 parking_env/parking_env.egg-info/
 *.pyc
+*.zip
