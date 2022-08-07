@@ -1,6 +1,6 @@
 import argparse
 import datetime
-import os.path
+import os
 
 import gym
 import parking_env
@@ -21,13 +21,13 @@ parser.add_argument('--log_path', type=str, default='./log', help='logging path'
 parser.add_argument('--ckpt_path', type=str, default='', help='checkpoint path')
 parser.add_argument('--mode', type=str, default='3', choices=['1', '2', '3', '4', '5'], help='mode')
 
-
 args = parser.parse_args()
-date = datetime.datetime.strftime(datetime.datetime.now(), '%m%d')
-args.log_path = os.path.join(args.log_path, f'DQN_{args.mode}_{date}')
+
+time = datetime.datetime.strftime(datetime.datetime.now(), '%m%d_%H%M')
+args.log_path = os.path.join(args.log_path, f'DQN_{args.mode}_{time}')
 # args.ckpt_path = 'log/rl_model_1000000_steps'
 if not args.ckpt_path:
-    args.ckpt_path = os.path.join(args.log_path, f'DQN_{args.mode}_{date}/dqn_agent')
+    args.ckpt_path = os.path.join(args.log_path, f'DQN_{args.mode}_{time}/dqn_agent')
 
 env = gym.make(args.env, render=args.render, mode=args.mode)
 env = DummyVecEnv([lambda: env])
@@ -50,7 +50,7 @@ model = DQN.load(args.ckpt_path, env=env, print_system_info=True)
 
 episode_return = 0
 for i in range(1000):
-    action, _states = model.predict(obs, deterministic=True)
+    action, _ = model.predict(obs, deterministic=True)
     obs, reward, done, info = env.step(action)
     episode_return += reward
     if done:
