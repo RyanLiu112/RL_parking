@@ -81,8 +81,6 @@ class CustomEnv(gym.GoalEnv):
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0, 0, -10)
 
-        self.reset()
-
     def render(self, mode='human'):
         """
         渲染当前画面
