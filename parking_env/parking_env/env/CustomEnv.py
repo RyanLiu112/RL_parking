@@ -66,7 +66,7 @@ class CustomEnv(gym.GoalEnv):
 
         # self.reward_weights = np.array([1, 0.3, 0, 0, 0.02, 0.02])
         if self.mode == '4':
-            self.reward_weights = np.array([0.4, 0.9, 0, 0, 0.15, 0.15])
+            self.reward_weights = np.array([0.3, 1, 0, 0, 0.15, 0.15])
         elif self.mode == '5':
             self.reward_weights = np.array([0.7, 0.6, 0, 0, 0.2, 0.2])
         else:
