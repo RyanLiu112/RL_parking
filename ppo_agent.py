@@ -8,6 +8,7 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.evaluation import evaluate_policy
 from stable_baselines3.common.callbacks import CheckpointCallback
 from stable_baselines3.common.logger import configure
+from stable_baselines3.common.vec_env import DummyVecEnv, VecNormalize
 
 
 parser = argparse.ArgumentParser()
@@ -30,6 +31,8 @@ if not args.ckpt_path:
 
 env = gym.make(args.env, render=args.render, mode=args.mode)
 env.reset()
+env = DummyVecEnv([lambda: env])
+env = VecNormalize(env, norm_obs=True, norm_reward=True, clip_obs=10.)
 
 model = PPO('MlpPolicy', env, verbose=1, seed=args.seed)
 logger = configure(args.log_path, ["stdout", "csv", "tensorboard"])
