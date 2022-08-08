@@ -25,7 +25,7 @@ args = parser.parse_args()
 
 time = datetime.datetime.strftime(datetime.datetime.now(), '%m%d_%H%M')
 args.log_path = os.path.join(args.log_path, f'PPO_{args.mode}_{time}')
-# args.ckpt_path = 'log/PPO/PPO_5_0808_1741/dqn_agent_1000000_steps.zip'
+# args.ckpt_path = 'log/PPO/PPO_5_0808_1741/ppo_agent_1000000_steps.zip'
 if not args.ckpt_path:
     args.ckpt_path = os.path.join(args.log_path, f'ppo_agent')
 
