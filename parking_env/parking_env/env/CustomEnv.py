@@ -67,13 +67,17 @@ class CustomEnv(gym.GoalEnv):
         # self.reward_weights = np.array([1, 0.3, 0, 0, 0.02, 0.02])
         if self.mode == '4':
             self.reward_weights = np.array([0.3, 1, 0, 0, 0.15, 0.15])
-        elif self.mode == '5':
-            self.reward_weights = np.array([0.7, 0.6, 0, 0, 0.2, 0.2])
+        # elif self.mode == '5':
+        #     self.reward_weights = np.array([0.7, 0.6, 0, 0, 0.2, 0.2])
         else:
             self.reward_weights = np.array([1, 0.3, 0, 0, 0.1, 0.1])
         self.target_orientation = None
         self.start_orientation = None
 
+        if self.mode in ['1', '2', '3']:
+            self.action_steps = 5
+        else:
+            self.action_steps = 3
         self.step_cnt = 0
         self.step_threshold = 500
 
@@ -136,22 +140,22 @@ class CustomEnv(gym.GoalEnv):
         # p.addUserDebugLine([-3.4, 1.5, 0.02], [-3.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
 
         # mode = 4 (左下)
-        self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-0.8, -2.1, 0.03], useFixedBase=10)
-        self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-2.8, -2.1, 0.03], useFixedBase=10)
-        self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_ld.urdf"), basePosition=[-1.8, -2.7, 0.03], useFixedBase=10)
-        # p.addUserDebugLine([-0.9, -1.6, 0.02], [-2.7, -1.6, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-0.9, -2.6, 0.02], [-2.7, -2.6, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-0.8, -2.1, 0.03], useFixedBase=10)
+        # self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-3.0, -2.1, 0.03], useFixedBase=10)
+        # self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_ld.urdf"), basePosition=[-1.9, -2.7, 0.03], useFixedBase=10)
+        # p.addUserDebugLine([-0.9, -1.6, 0.02], [-2.9, -1.6, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-0.9, -2.6, 0.02], [-2.9, -2.6, 0.02], [0.98, 0.98, 0.98], 2.5)
         # p.addUserDebugLine([-0.9, -1.6, 0.02], [-0.9, -2.6, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-2.7, -1.6, 0.02], [-2.7, -2.6, 0.02], [0.98, 0.98, 0.98], 2.5)
+        # p.addUserDebugLine([-2.9, -1.6, 0.02], [-2.9, -2.6, 0.02], [0.98, 0.98, 0.98], 2.5)
 
         # mode = 5 (右下)
-        # self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[1.7, -2.3, 0.03], useFixedBase=10)
-        # self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[2.9, -2.3, 0.03], useFixedBase=10)
-        # self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_rd.urdf"), basePosition=[2.7, -3.1, 0.03], useFixedBase=10)
-        # p.addUserDebugLine([1.4, -1.6, 0.02], [2.4, -1.6, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([2.2, -3.0, 0.02], [3.2, -3.0, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([1.4, -1.6, 0.02], [2.2, -3.0, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([2.4, -1.6, 0.02], [3.2, -3.0, 0.02], [0.98, 0.98, 0.98], 2.5)
+        self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[1.7, -2.3, 0.03], useFixedBase=10)
+        self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[2.9, -2.3, 0.03], useFixedBase=10)
+        self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_rd.urdf"), basePosition=[2.7, -3.1, 0.03], useFixedBase=10)
+        p.addUserDebugLine([1.4, -1.6, 0.02], [2.4, -1.6, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([2.2, -3.0, 0.02], [3.2, -3.0, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([1.4, -1.6, 0.02], [2.2, -3.0, 0.02], [0.98, 0.98, 0.98], 2.5)
+        p.addUserDebugLine([2.4, -1.6, 0.02], [3.2, -3.0, 0.02], [0.98, 0.98, 0.98], 2.5)
 
         # 起始点
         # p.addUserDebugLine([-0.2, -0.2, 0.02], [-0.2, 0.2, 0.02], [0.98, 0.98, 0.98], 2.5)
@@ -174,7 +178,7 @@ class CustomEnv(gym.GoalEnv):
             self.start_orientation = [0, 0, np.pi * 4 / 2]
             self.target_orientation = np.pi * 3 / 2
         elif self.mode == '4':
-            self.goal = np.array([-3.6 / 2, -4.2 / 2])
+            self.goal = np.array([-3.8 / 2, -4.2 / 2])
             self.start_orientation = [0, 0, np.pi * 0 / 2]
             self.target_orientation = np.pi * 0 / 2
         elif self.mode == '5':
@@ -186,7 +190,7 @@ class CustomEnv(gym.GoalEnv):
 
         # Reload the plane and car
         # basePosition = [np.random.rand() * 3 + 2, np.random.rand() * 8 + 1, 0.2]
-        self.t = Car(self.client, basePosition=basePosition, baseOrientationEuler=self.start_orientation, carType=self.car_type)
+        self.t = Car(self.client, basePosition=basePosition, baseOrientationEuler=self.start_orientation, carType=self.car_type, action_steps=self.action_steps)
         self.car = self.t.car
 
         # Get observation to return
@@ -218,7 +222,11 @@ class CustomEnv(gym.GoalEnv):
         :return: the corresponding reward
         """
         p_norm = 0.5
-        return -np.power(np.dot(np.abs(achieved_goal - desired_goal), np.array(self.reward_weights)), p_norm)
+        reward = -np.power(np.dot(np.abs(achieved_goal - desired_goal), np.array(self.reward_weights)), p_norm)
+        # if self.mode == '4':
+        #     if False:
+        #         reward -= 5
+        return reward
 
     def judge_collision(self):
         done = False
@@ -312,7 +320,7 @@ class CustomEnv(gym.GoalEnv):
 
 class Car:
     def __init__(self, client, basePosition=[0, 0, 0.2], baseOrientationEuler=[0, 0, np.pi / 2],
-                 max_velocity=6, max_force=100, carType='husky'):
+                 max_velocity=6, max_force=100, carType='husky', action_steps=None):
         self.client = client
         urdfname = carType + '/' + carType + '.urdf'
         self.car = p.loadURDF(fileName=urdfname, basePosition=basePosition, baseOrientation=p.getQuaternionFromEuler(baseOrientationEuler))
@@ -322,6 +330,7 @@ class Car:
 
         self.max_velocity = max_velocity
         self.max_force = max_force
+        self.action_steps = action_steps
 
     def get_ids(self):
         return self.car, self.client
@@ -331,18 +340,18 @@ class Car:
         force = self.max_force  # Newton
 
         if action == 0:  # forward
-            for i in range(5):
+            for i in range(self.action_steps):
                 for joint in range(2, 6):
                     p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=velocity, force=force)
                 p.stepSimulation()
         elif action == 1:  # back
-            for i in range(5):
+            for i in range(self.action_steps):
                 for joint in range(2, 6):
                     p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=-velocity, force=force)
                 p.stepSimulation()
         elif action == 2:  # left
             targetVel = 3
-            for i in range(5):
+            for i in range(self.action_steps):
                 for joint in range(2, 6):
                     for joint in range(1, 3):
                         p.setJointMotorControl2(self.car, 2 * joint + 1, p.VELOCITY_CONTROL,
@@ -353,7 +362,7 @@ class Car:
                     p.stepSimulation()
         elif action == 3:  # right
             targetVel = 3
-            for i in range(5):
+            for i in range(self.action_steps):
                 for joint in range(2, 6):
                     for joint in range(1, 3):
                         p.setJointMotorControl2(self.car, 2 * joint, p.VELOCITY_CONTROL, targetVelocity=targetVel,
