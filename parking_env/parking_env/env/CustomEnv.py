@@ -120,9 +120,9 @@ class CustomEnv(gym.GoalEnv):
 
         # mode = 1, 2 (右上)
         if self.mode == '1' or self.mode == '2':
-            self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[1.3, 2.1, 0.03], useFixedBase=10)
-            self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[2.5, 2.1, 0.03], useFixedBase=10)
-            self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_ru.urdf"), basePosition=[1.9, 2.8, 0.03], useFixedBase=10)
+            self.left_wall1 = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[1.3, 2.1, 0.03], useFixedBase=10)
+            self.right_wall1 = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[2.5, 2.1, 0.03], useFixedBase=10)
+            self.front_wall1 = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_ru.urdf"), basePosition=[1.9, 2.8, 0.03], useFixedBase=10)
         # else:
         #     p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[1.3, 2.1, 0.03], useFixedBase=10)
         #     p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[2.5, 2.1, 0.03], useFixedBase=10)
@@ -134,9 +134,9 @@ class CustomEnv(gym.GoalEnv):
 
         # mode = 3, 6 (左上)
         if self.mode == '3' or self.mode == '6':
-            self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-0.3, 2.1, 0.03], useFixedBase=10)
-            self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-3.5, 2.1, 0.03], useFixedBase=10)
-            self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_lu.urdf"), basePosition=[-1.9, 2.8, 0.03], useFixedBase=10)
+            self.left_wall2 = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-0.3, 2.1, 0.03], useFixedBase=10)
+            self.right_wall2 = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-3.5, 2.1, 0.03], useFixedBase=10)
+            self.front_wall2 = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_lu.urdf"), basePosition=[-1.9, 2.8, 0.03], useFixedBase=10)
             self.parked_car1 = p.loadURDF("husky/husky.urdf", basePosition=[-0.9, 2.1, 0.0], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
             self.parked_car2 = p.loadURDF("husky/husky.urdf", basePosition=[-2.9, 2.1, 0.0], baseOrientation=p.getQuaternionFromEuler([0, 0, np.pi / 2]), useFixedBase=True)
         # else:
@@ -154,9 +154,9 @@ class CustomEnv(gym.GoalEnv):
 
         # mode = 4 (左下)
         if self.mode == '4':
-            self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-0.8, -2.1, 0.03], useFixedBase=10)
-            self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-3.0, -2.1, 0.03], useFixedBase=10)
-            self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_ld.urdf"), basePosition=[-1.9, -2.7, 0.03], useFixedBase=10)
+            self.left_wall3 = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-0.8, -2.1, 0.03], useFixedBase=10)
+            self.right_wall3 = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-3.0, -2.1, 0.03], useFixedBase=10)
+            self.front_wall3 = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_ld.urdf"), basePosition=[-1.9, -2.7, 0.03], useFixedBase=10)
         # else:
         #     p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-0.8, -2.1, 0.03], useFixedBase=10)
         #     p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_ld.urdf"), basePosition=[-3.0, -2.1, 0.03], useFixedBase=10)
@@ -168,9 +168,9 @@ class CustomEnv(gym.GoalEnv):
 
         # mode = 5 (右下)
         if self.mode == '5':
-            self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[1.6, -2.15, 0.03], useFixedBase=10)
-            self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[2.9, -2.15, 0.03], useFixedBase=10)
-            self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_rd.urdf"), basePosition=[2.55, -2.8, 0.03], useFixedBase=10)
+            self.left_wall4 = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[1.6, -2.15, 0.03], useFixedBase=10)
+            self.right_wall4 = p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[2.9, -2.15, 0.03], useFixedBase=10)
+            self.front_wall4 = p.loadURDF(os.path.join(self.base_path, "assets/down/front_boundary_rd.urdf"), basePosition=[2.55, -2.8, 0.03], useFixedBase=10)
         # else:
         #     p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[1.6, -2.15, 0.03], useFixedBase=10)
         #     p.loadURDF(os.path.join(self.base_path, "assets/down/side_boundary_rd.urdf"), basePosition=[2.9, -2.15, 0.03], useFixedBase=10)
@@ -213,18 +213,18 @@ class CustomEnv(gym.GoalEnv):
             self.start_orientation = [0, 0, np.random.rand() * 2 * np.pi]
             self.target_orientation = np.pi * 3 / 2
             while 1:
-                random_x = (np.random.rand() - 0.5) * 4
-                random_y = (np.random.rand() - 0.5) * 4
-                if random_x < -1 and random_y > 1:
+                random_x = (np.random.rand() - 0.5) * 3
+                random_y = (np.random.rand() - 0.5) * 3
+                if random_x < 0 and random_y > 0:
                     continue
                 else:
                     break
+            # print(f'ori: {self.start_orientation[2]}, {random_x}, {random_y}')
             basePosition = [random_x, random_y, 0.2]
 
         self.desired_goal = np.array([self.goal[0], self.goal[1], 0.0, 0.0, np.cos(self.target_orientation), np.sin(self.target_orientation)])
 
         # 加载小车
-        # basePosition = [np.random.rand() * 3 + 2, np.random.rand() * 8 + 1, 0.2]
         self.t = Car(self.client, basePosition=basePosition, baseOrientationEuler=self.start_orientation, carType=self.car_type, action_steps=self.action_steps)
         self.car = self.t.car
 
@@ -276,13 +276,26 @@ class CustomEnv(gym.GoalEnv):
         """
 
         done = False
-        points1 = p.getContactPoints(self.car, self.left_wall)
-        points2 = p.getContactPoints(self.car, self.right_wall)
-        points3 = p.getContactPoints(self.car, self.front_wall)
+        if self.mode == '1' or self.mode == '2':
+            points1 = p.getContactPoints(self.car, self.left_wall1)
+            points2 = p.getContactPoints(self.car, self.right_wall1)
+            points3 = p.getContactPoints(self.car, self.front_wall1)
+        elif self.mode == '3' or self.mode == '6':
+            points1 = p.getContactPoints(self.car, self.left_wall2)
+            points2 = p.getContactPoints(self.car, self.right_wall2)
+            points3 = p.getContactPoints(self.car, self.front_wall2)
+        elif self.mode == '4':
+            points1 = p.getContactPoints(self.car, self.left_wall3)
+            points2 = p.getContactPoints(self.car, self.right_wall3)
+            points3 = p.getContactPoints(self.car, self.front_wall3)
+        elif self.mode == '5':
+            points1 = p.getContactPoints(self.car, self.left_wall4)
+            points2 = p.getContactPoints(self.car, self.right_wall4)
+            points3 = p.getContactPoints(self.car, self.front_wall4)
 
         if len(points1) or len(points2) or len(points3):
             done = True
-        if self.mode == '3':
+        if self.mode == '3' or self.mode == '6':
             points4 = p.getContactPoints(self.car, self.parked_car1)
             points5 = p.getContactPoints(self.car, self.parked_car2)
             if len(points4) or len(points5):
