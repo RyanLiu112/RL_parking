@@ -12,7 +12,7 @@ from gym import spaces
 class CustomEnv(gym.GoalEnv):
     metadata = {'render.modes': ['human']}
 
-    def __init__(self, render=False, base_path=os.getcwd(), car_type='husky', mode='1', manual=False, multi_obs=False):
+    def __init__(self, render=False, base_path=os.getcwd(), car_type='husky', mode='1', manual=False, multi_obs=False, render_video=False):
         """Inherited from gym.Env
 
         Arguments:\n
@@ -33,7 +33,7 @@ class CustomEnv(gym.GoalEnv):
         self.manual = manual
         self.multi_obs = multi_obs
         self.mode = mode
-        assert self.mode in ['1', '2', '3', '4', '5']
+        assert self.mode in ['1', '2', '3', '4', '5', '6']
 
         self.car = None
         self.done = False
@@ -74,7 +74,7 @@ class CustomEnv(gym.GoalEnv):
         self.target_orientation = None
         self.start_orientation = None
 
-        if self.mode in ['1', '2', '3', '5']:
+        if self.mode in ['1', '2', '3', '5', '6']:
             self.action_steps = 5
         else:
             self.action_steps = 3
@@ -87,6 +87,9 @@ class CustomEnv(gym.GoalEnv):
         else:
             self.client = p.connect(p.DIRECT)
             time.sleep(1. / 240.)
+        if render and render_video:
+            p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
+            p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
         p.setGravity(0, 0, -10)
 
@@ -132,7 +135,7 @@ class CustomEnv(gym.GoalEnv):
         # p.addUserDebugLine([2.4, 2.7, 0.02], [2.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
 
         # mode = 3 (左上)
-        if self.mode == '3':
+        if self.mode == '3' or self.mode == '6':
             self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-0.3, 2.1, 0.03], useFixedBase=10)
             self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-3.5, 2.1, 0.03], useFixedBase=10)
             self.front_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/front_boundary_lu.urdf"), basePosition=[-1.9, 2.8, 0.03], useFixedBase=10)
@@ -207,15 +210,27 @@ class CustomEnv(gym.GoalEnv):
             self.goal = np.array([4.53 / 2, -4.55 / 2])
             self.start_orientation = [0, 0, np.pi * 2 / 2]
             self.target_orientation = 2.070143
+        elif self.mode == '6':
+            self.goal = np.array([-3.8 / 2, 4.2 / 2])
+            self.start_orientation = [0, 0, np.random.rand() * 2 * np.pi]
+            self.target_orientation = np.pi * 3 / 2
+            while 1:
+                random_x = (np.random.rand() - 0.5) * 4
+                random_y = (np.random.rand() - 0.5) * 4
+                if random_x < -1 and random_y > 1:
+                    continue
+                else:
+                    break
+            basePosition = [random_x, random_y, 0.2]
 
         self.desired_goal = np.array([self.goal[0], self.goal[1], 0.0, 0.0, np.cos(self.target_orientation), np.sin(self.target_orientation)])
 
-        # Reload the plane and car
+        # 加载小车
         # basePosition = [np.random.rand() * 3 + 2, np.random.rand() * 8 + 1, 0.2]
         self.t = Car(self.client, basePosition=basePosition, baseOrientationEuler=self.start_orientation, carType=self.car_type, action_steps=self.action_steps)
         self.car = self.t.car
 
-        # Get observation to return
+        # 获取当前observation
         car_ob, self.vector = self.t.get_observation()
         observation = np.array(list(car_ob))
 
@@ -238,16 +253,14 @@ class CustomEnv(gym.GoalEnv):
         Proximity to the goal is rewarded
         We use a weighted p-norm
         :param achieved_goal: the goal that was achieved
-        :param info: 
-        :param desired_goal: 
+        :param info:
+        :param desired_goal:
         :param p_norm: the Lp^p norm used in the reward. Use p<1 to have high kurtosis for rewards in [0, 1]
         :return: the corresponding reward
         """
         p_norm = 0.5
         reward = -np.power(np.dot(np.abs(achieved_goal - desired_goal), np.array(self.reward_weights)), p_norm)
-        # if self.mode == '4':
-        #     if False:
-        #         reward -= 5
+
         return reward
 
     def judge_collision(self):
@@ -267,19 +280,6 @@ class CustomEnv(gym.GoalEnv):
         return done
 
     def step(self, action):
-        """
-        Takes one step.
-
-        Arguments:\n
-            - action -- A list of the form [throttle, steering_angle]
-
-        Return:\n
-            - obs -- The observation of the next state
-            - reward -- The reward for the current time step
-            - done -- True if the episode is complete, else False
-            - info -- Additional Information
-        """
-        # Feed action to the car and get observation of car's state
         self.t.apply_action(action)
         p.stepSimulation()
         car_ob, self.vector = self.t.get_observation()
@@ -291,16 +291,9 @@ class CustomEnv(gym.GoalEnv):
         if self.manual:
             print(f'dis: {distance}, reward: {reward}, center: {self.goal}, pos: {car_ob}')
 
-        # TODO: See if the reward procedure can be divided into 2 parts. One for reaching the centre, and the other for parking
-        # reward += abs(self.vector - target_vector) * -1
-
-        # contact_points = p.getContactPoints(self.t.get_ids()[0])
-        # print('contact_points:', contact_points)
-
-        # Condition for done
         self.done = False
         self.success = False
-        # if np.sum(abs(pos - slot_center)) < 0.8:  # and abs(self.vector - target_vector) < 0.1:
+
         if distance < 0.1:
             self.success = True
             self.done = True
@@ -332,12 +325,10 @@ class CustomEnv(gym.GoalEnv):
         return observation, reward, self.done, info
 
     def seed(self, seed=None):
-        """Getting the seed of the environment"""
         self.np_random, seed = gym.utils.seeding.np_random(seed)
         return [seed]
 
     def close(self):
-        """Shuts down the simulation"""
         p.disconnect(self.client)
 
 
