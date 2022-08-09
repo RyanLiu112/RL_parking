@@ -12,16 +12,16 @@
         <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.001"/>
       </inertial>
       <visual name="Cube">
-        <origin xyz="0 0 0" rpy="0 0 0.5236"/>
+        <origin xyz="0 0 0" rpy="0 0 0.4993467"/>
         <geometry>
-          <box size="0.1 1.6 0.5"/>
+          <box size="0.1 1.253 0.5"/>
         </geometry>
         <material name="blue"/>
       </visual>
       <collision>
-        <origin xyz="0 0 0" rpy="0 0 0.5236"/>
+        <origin xyz="0 0 0" rpy="0 0 0.4993467"/>
         <geometry>
-          <box size="0.1 1.6 0.5"/>
+          <box size="0.1 1.253 0.5"/>
         </geometry>
       </collision>
     </link>
