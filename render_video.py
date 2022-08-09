@@ -24,20 +24,28 @@ parser.add_argument('--mode', type=str, default='2', choices=['1', '2', '3', '4'
 
 args = parser.parse_args()
 
-# time = datetime.datetime.strftime(datetime.datetime.now(), '%m%d_%H%M')
-# args.log_path = os.path.join(args.log_path, f'DQN_{args.mode}_{time}')
-# args.ckpt_path = 'log/DQN_5_0808_1635/dqn_agent.zip'
-args.ckpt_path = 'dqn_agent_2.zip'
-# if not args.ckpt_path:
-#     args.ckpt_path = os.path.join(args.log_path, f'dqn_agent')
 
+# args.ckpt_path = 'log/DQN_1_0808_2123/dqn_agent.zip'
+# args.ckpt_path = 'log/DQN_2_0809_1026/dqn_agent.zip'
+# args.ckpt_path = 'log/DQN_3_0807_2313/dqn_agent.zip'
+# args.ckpt_path = 'log/DQN_4_0809_0111/dqn_agent.zip'
+args.ckpt_path = 'log/DQN_5_0808_2029/dqn_agent.zip'
+
+args.mode = args.ckpt_path[8]
+
+if args.mode in ['1', '2', '3']:
+    cameraYaw = 0
+else:
+    cameraYaw = 180
 
 # Evaluation
-env = gym.make(args.env, render=True, mode=args.mode)
+env = gym.make(args.env, render=True, mode=args.mode, render_video=True)
 obs = env.reset()
 model = DQN.load(args.ckpt_path, env=env, print_system_info=True)
 
+p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 1)
 log_id = p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, f"log/DQN_{args.mode}.mp4")
+# log_id = p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, f"log/env_720.mp4")
 
 episode_return = 0
 for i in range(1000):
@@ -46,16 +54,27 @@ for i in range(1000):
     position, _ = p.getBasePositionAndOrientation(env.car)
     p.resetDebugVisualizerCamera(
         cameraDistance=5,
-        cameraYaw=0,
+        cameraYaw=cameraYaw,
         cameraPitch=-40,
         cameraTargetPosition=position
     )
-    time.sleep(1 / 20)
+    time.sleep(1 / 240)
 
     episode_return += reward
     if done:
         break
 
+# for cameraYaw in range(720):
+#     position, _ = p.getBasePositionAndOrientation(env.car)
+#     p.resetDebugVisualizerCamera(
+#         cameraDistance=6,
+#         cameraYaw=cameraYaw,
+#         cameraPitch=-40,
+#         cameraTargetPosition=position
+#     )
+#     time.sleep(1 / 240)
+
 p.stopStateLogging(log_id)
 
+env.close()
 print(f'episode return: {episode_return}')
