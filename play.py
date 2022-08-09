@@ -1,8 +1,17 @@
+import argparse
 import gym
 import parking_env
 import pybullet as p
 
-env = gym.make("parking_env-v0", render=True, manual=True, mode='3')
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--env', type=str, default="parking_env-v0", help='name of the environment to run')
+parser.add_argument('--render', type=bool, default=True, help='render the environment')
+parser.add_argument('--mode', type=str, default='1', choices=['1', '2', '3', '4', '5'], help='mode')
+
+args = parser.parse_args()
+
+env = gym.make(args.env, render=args.render, manual=True, mode=args.mode)
 env.reset()
 
 done = False
@@ -22,6 +31,3 @@ while True:
         else:
             pass
         next_state, reward, done, _ = env.step(action)
-    if done:
-        print("Episode Done\n\n\n")
-        break
