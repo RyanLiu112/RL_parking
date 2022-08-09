@@ -8,31 +8,31 @@
 
 - 任务1：垂直倒车入库
 
-<img src="/Users/liurunze/RL_parking/imgs/DQN_1.gif" alt="DQN_1" style="zoom:80%;" />
+![DQN_1](/Users/liurunze/RL_parking/imgs/DQN_1.gif)
 
 
 
 - 任务2：侧方位-垂直倒车入库
 
-<img src="/Users/liurunze/RL_parking/imgs/DQN_2.gif" alt="DQN_2" style="zoom:80%;" />
+![DQN_2](/Users/liurunze/RL_parking/imgs/DQN_2.gif)
 
 
 
 - 任务3：侧方位-垂直倒车入库（旁边有小车）
 
-<img src="/Users/liurunze/RL_parking/imgs/DQN_3.gif" alt="DQN_3" style="zoom:80%;" />
+![DQN_3](/Users/liurunze/RL_parking/imgs/DQN_3.gif)
 
 
 
 - 任务4：侧方位-平行倒车入库
 
-<img src="/Users/liurunze/RL_parking/imgs/DQN_4.gif" alt="DQN_4" style="zoom:80%;" />
+![DQN_4](/Users/liurunze/RL_parking/imgs/DQN_4.gif)
 
 
 
 - 任务5：斜方位-30度倒车入库
 
-<img src="/Users/liurunze/RL_parking/imgs/DQN_5.gif" alt="DQN_5" style="zoom:80%;" />
+![DQN_5](/Users/liurunze/RL_parking/imgs/DQN_5.gif)
 
 
 
@@ -107,8 +107,6 @@ python dqn_agent.py --mode=5
 ```
 python evaluate.py --mode=1
 ```
-
-
 
 
 
