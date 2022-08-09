@@ -13,19 +13,16 @@ class CustomEnv(gym.GoalEnv):
     metadata = {'render.modes': ['human']}
 
     def __init__(self, render=False, base_path=os.getcwd(), car_type='husky', mode='1', manual=False, multi_obs=False, render_video=False):
-        """Inherited from gym.Env
+        """
+        初始化环境
 
-        Arguments:\n
-            - render -- True if the arena should be graphically rendered, else False
-            - base_path -- base_path of where the code is run from
-            - car_type -- The car to park('husky')
-
-        List of Available Functions:\n
-            - render() -- Not useful as rendering occurs as a parameter in gym.make()
-            - reset() -- Reset the simulation
-            - step(action) -- Take a step
-            - seed() -- Returns the seed for the environment
-            - close() -- Close the environment
+        :param render: 是否渲染GUI界面
+        :param base_path: 项目路径
+        :param car_type: 小车类型（husky）
+        :param mode: 任务类型
+        :param manual: 是否手动操作
+        :param multi_obs: 是否使用多个observation
+        :param render_video: 是否渲染视频
         """
 
         self.base_path = base_path
@@ -98,16 +95,17 @@ class CustomEnv(gym.GoalEnv):
         渲染当前画面
 
         :param mode: 渲染模式
-        :return:
         """
+
         p.stepSimulation(self.client)
         time.sleep(1. / 240.)
 
     def reset(self):
         """
-        Resets the simulation.
+        重置环境
 
         """
+
         # reset function to be made for muliple-agents
         p.resetSimulation(self.client)
         p.setGravity(0, 0, -10)
@@ -115,10 +113,10 @@ class CustomEnv(gym.GoalEnv):
         # new Loading the plane
         self.ground = p.loadURDF(os.path.join(self.base_path, "assets/arena_new.urdf"), basePosition=[0, 0, 0.005], useFixedBase=10)
 
-        # p.addUserDebugLine([-3.5, -3.5, 0.02], [-3.5, 3.5, 0.02], [0.75, 0.75, 0.75], 5)
-        # p.addUserDebugLine([-3.5, -3.5, 0.02], [3.5, -3.5, 0.02], [0.75, 0.75, 0.75], 5)
-        # p.addUserDebugLine([3.5, 3.5, 0.02], [3.5, -3.5, 0.02], [0.75, 0.75, 0.75], 5)
-        # p.addUserDebugLine([3.5, 3.5, 0.02], [-3.5, 3.5, 0.02], [0.75, 0.75, 0.75], 5)
+        p.addUserDebugLine([-3.5, -3.5, 0.02], [-3.5, 3.5, 0.02], [0.75, 0.75, 0.75], 5)
+        p.addUserDebugLine([-3.5, -3.5, 0.02], [3.5, -3.5, 0.02], [0.75, 0.75, 0.75], 5)
+        p.addUserDebugLine([3.5, 3.5, 0.02], [3.5, -3.5, 0.02], [0.75, 0.75, 0.75], 5)
+        p.addUserDebugLine([3.5, 3.5, 0.02], [-3.5, 3.5, 0.02], [0.75, 0.75, 0.75], 5)
 
         # mode = 1, 2 (右上)
         if self.mode == '1' or self.mode == '2':
@@ -134,7 +132,7 @@ class CustomEnv(gym.GoalEnv):
         # p.addUserDebugLine([2.4, 2.7, 0.02], [1.4, 2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
         # p.addUserDebugLine([2.4, 2.7, 0.02], [2.4, 1.5, 0.02], [0.98, 0.98, 0.98], 2.5)
 
-        # mode = 3 (左上)
+        # mode = 3, 6 (左上)
         if self.mode == '3' or self.mode == '6':
             self.left_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-0.3, 2.1, 0.03], useFixedBase=10)
             self.right_wall = p.loadURDF(os.path.join(self.base_path, "assets/up/side_boundary.urdf"), basePosition=[-3.5, 2.1, 0.03], useFixedBase=10)
@@ -246,24 +244,37 @@ class CustomEnv(gym.GoalEnv):
         return observation
 
     def distance_function(self, pos):
+        """
+        计算小车与目标点的距离（2-范数）
+
+        :param pos: 小车当前坐标 [x, y, z]
+        :return: 小车与目标点的距离
+        """
+
         return np.sqrt(pow(pos[0] - self.goal[0], 2) + pow(pos[1] - self.goal[1], 2))
 
-    def compute_reward(self, achieved_goal, desired_goal, info) -> float:
+    def compute_reward(self, achieved_goal, desired_goal, info):
         """
-        Proximity to the goal is rewarded
-        We use a weighted p-norm
-        :param achieved_goal: the goal that was achieved
-        :param info:
-        :param desired_goal:
-        :param p_norm: the Lp^p norm used in the reward. Use p<1 to have high kurtosis for rewards in [0, 1]
-        :return: the corresponding reward
+        计算当前步的奖励
+
+        :param achieved_goal: 小车当前位置 [x, y, z]
+        :param desired_goal: 目标点 [x, y, z]
+        :param info: 信息
+        :return: 奖励
         """
+
         p_norm = 0.5
         reward = -np.power(np.dot(np.abs(achieved_goal - desired_goal), np.array(self.reward_weights)), p_norm)
 
         return reward
 
     def judge_collision(self):
+        """
+        判断小车与墙壁、停放着的小车是否碰撞
+
+        :return: 是否碰撞
+        """
+
         done = False
         points1 = p.getContactPoints(self.car, self.left_wall)
         points2 = p.getContactPoints(self.car, self.right_wall)
@@ -280,9 +291,16 @@ class CustomEnv(gym.GoalEnv):
         return done
 
     def step(self, action):
-        self.t.apply_action(action)
+        """
+        环境步进
+
+        :param action: 小车动作
+        :return: observation, reward, done, info
+        """
+
+        self.t.apply_action(action)  # 小车执行动作
         p.stepSimulation()
-        car_ob, self.vector = self.t.get_observation()
+        car_ob, self.vector = self.t.get_observation()  # 获取小车状态
 
         position = np.array(car_ob[:2])
         distance = self.distance_function(position)
@@ -325,16 +343,40 @@ class CustomEnv(gym.GoalEnv):
         return observation, reward, self.done, info
 
     def seed(self, seed=None):
+        """
+        设置环境种子
+
+        :param seed: 种子
+        :return: [seed]
+        """
+
         self.np_random, seed = gym.utils.seeding.np_random(seed)
         return [seed]
 
     def close(self):
+        """
+        关闭环境
+
+        """
+
         p.disconnect(self.client)
 
 
 class Car:
     def __init__(self, client, basePosition=[0, 0, 0.2], baseOrientationEuler=[0, 0, np.pi / 2],
                  max_velocity=6, max_force=100, carType='husky', action_steps=None):
+        """
+        初始化小车
+
+        :param client: pybullet client
+        :param basePosition: 小车初始位置
+        :param baseOrientationEuler: 小车初始方向
+        :param max_velocity: 最大速度
+        :param max_force: 最大力
+        :param carType: 小车类型
+        :param action_steps: 动作步数
+        """
+
         self.client = client
         urdfname = carType + '/' + carType + '.urdf'
         self.car = p.loadURDF(fileName=urdfname, basePosition=basePosition, baseOrientation=p.getQuaternionFromEuler(baseOrientationEuler))
@@ -346,10 +388,13 @@ class Car:
         self.max_force = max_force
         self.action_steps = action_steps
 
-    def get_ids(self):
-        return self.car, self.client
-
     def apply_action(self, action):
+        """
+        小车执行动作
+
+        :param action: 动作
+        """
+
         velocity = self.max_velocity  # rad/s
         force = self.max_force  # Newton
 
@@ -395,6 +440,12 @@ class Car:
             raise ValueError
 
     def get_observation(self):
+        """
+        获取小车当前状态
+
+        :return: observation, vector
+        """
+
         position, angle = p.getBasePositionAndOrientation(self.car)  # 获取小车位姿
         angle = p.getEulerFromQuaternion(angle)
         velocity = p.getBaseVelocity(self.car)[0]
