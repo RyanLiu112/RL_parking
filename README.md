@@ -68,9 +68,8 @@
 
 状态是一个6维向量，分别为小车的x坐标、y坐标、x方向线速度、y方向线速度、与x方向夹角余弦值、与y方向夹角余弦值。
 
-$$
-\text{observation = [position\_x, position\_y, velocity\_x, velocity\_y, cos(angle), sin(angle)]}
-$$
+<img src="./imgs/obs.png" alt="obs"  />
+
 
 
 ### 2. Action
@@ -82,9 +81,9 @@ $$
 ### 3. Reward
 
 对于大部分状态-动作对，我们定义如下 reward：
-$$
-\text{reward} = -\sqrt{\text{observation} - \text{goal}}
-$$
+
+<img src="./imgs/reward.png" alt="reward"  />
+
 当小车碰撞到墙壁或其他小车时，定义 reward = -500。
 
 
