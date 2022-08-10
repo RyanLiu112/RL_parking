@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="figure10" style="width: 1000px;height:600px;"></div>
+
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/jquery"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <script type="text/javascript">
+    var dom = document.getElementById('figure10');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+
+
+  const graph ={
+    "nodes": [
+        {
+          "id": "0",
+          "name": "主要挑战",
+          "symbolSize": 45,
+          "x": -266.82776,
+          "y": 299.6904,
+          "value": 5.1,
+          "category": 0
+        },
+        {
+            "id": "10",
+            "name": "感知方面",
+            "symbolSize": 10,
+            "x": -266.82776,
+            "y": 299.6904,
+            "value": 1.1,
+            "category": 0
+          },
+          {
+            "id": "20",
+            "name": "短期至中期推理",
+            "symbolSize": 10,
+            "x": -266.82776,
+            "y": 299.6904,
+            "value": 1.2,
+            "category": 0
+          },
+          {
+            "id": "30",
+            "name": "训练数据的可用性",
+            "symbolSize": 10,
+            "x": -266.82776,
+            "y": 299.6904,
+            "value": 1.3,
+            "category": 0
+          },
+          {
+            "id": "40",
+            "name": "学习角落案例",
+            "symbolSize": 10,
+            "x": -266.82776,
+            "y": 299.6904,
+            "value": 1.4,
+            "category": 0
+          },
+          {
+            "id": "50",
+            "name": "基于深度强化学习的控制方法",
+            "symbolSize": 10,
+            "x": -266.82776,
+            "y": 299.6904,
+            "value": 1.5,
+            "category": 0
+          },
+          {
+            "id": "60",
+            "name": "功能安全",
+            "symbolSize": 10,
+            "x": -266.82776,
+            "y": 299.6904,
+            "value": 1.6,
+            "category": 0
+          },
+          {
+            "id": "70",
+            "name": "实时计算和通信",
+            "symbolSize": 10,
+            "x": -266.82776,
+            "y": 299.6904,
+            "value": 1.7,
+            "category": 0
+          },
+        
+        {
+          "id": "1",
+          "name": "在硬件等方面的预测",
+          "symbolSize": 45,
+          "x": -418.08344,
+          "y": 446.8853,
+          "value": 5.2,
+          "category": 1
+        },
+        {
+            "id": "11",
+            "name": "硬件方面预测",
+            "symbolSize": 10,
+            "x": -418.08344,
+            "y": 446.8853,
+            "value": 2.1,
+            "category": 1
+          },
+          {
+            "id": "12",
+            "name": "安全性方面预测",
+            "symbolSize": 10,
+            "x": -418.08344,
+            "y": 446.8853,
+            "value": 2.2,
+            "category": 1
+          },
+          {
+            "id": "13",
+            "name": "训练数据源预测",
+            "symbolSize": 10,
+            "x": -418.08344,
+            "y": 446.8853,
+            "value": 2.3,
+            "category": 1
+          },
+          {
+            "id": "14",
+            "name": "ADS算力平台预测",
+            "symbolSize": 10,
+            "x": -418.08344,
+            "y": 446.8853,
+            "value": 2.4,
+            "category": 1
+          },
+
+
+        {
+          "id": "2",
+          "name": "在算法方面的预测",
+          "symbolSize": 45,
+          "x": -212.76457,
+          "y": 245.29176,
+          "value": 5.3,
+          "category": 2
+        },
+
+        {
+          "id": "3",
+          "name": "在BEV感知方面的预测",
+          "symbolSize": 45,
+          "x": -242.82404,
+          "y": 245.26283,
+          "value": 5.4,
+          "category": 3
+        }
+    ],
+    "links": [
+      {
+        "source": "0",
+        "target": "1"
+      },
+      {
+        "source": "0",
+        "target": "10"
+      },
+      {
+        "source": "0",
+        "target": "20"
+      },
+      {
+        "source": "0",
+        "target": "30"
+      },
+      {
+        "source": "0",
+        "target": "40"
+      },
+      {
+        "source": "0",
+        "target": "50"
+      },
+      {
+        "source": "0",
+        "target": "60"
+      },
+      {
+        "source": "0",
+        "target": "70"
+      },
+      {
+        "source": "1",
+        "target": "11"
+      },
+      {
+        "source": "1",
+        "target": "12"
+      },
+      {
+        "source": "1",
+        "target": "13"
+      },
+      {
+        "source": "1",
+        "target": "14"
+      },
+      {
+        "source": "10",
+        "target": "11"
+      },
+      {
+        "source": "10",
+        "target": "13"
+      },
+      {
+        "source": "10",
+        "target": "14"
+      },
+      {
+        "source": "10",
+        "target": "3"
+      },
+      {
+        "source": "20",
+        "target": "2"
+      },
+      {
+        "source": "30",
+        "target": "13"
+      },
+      {
+        "source": "40",
+        "target": "13"
+      },
+      {
+        "source": "40",
+        "target": "2"
+      },
+      {
+        "source": "50",
+        "target": "2"
+      },
+      {
+        "source": "60",
+        "target": "12"
+      },
+      {
+        "source": "60",
+        "target": "14"
+      },
+      {
+        "source": "60",
+        "target": "2"
+      },
+      {
+        "source": "70",
+        "target": "11"
+      },
+      {
+        "source": "70",
+        "target": "14"
+      },
+      {
+        "source": "70",
+        "target": "2"
+      },
+      {
+        "source": "70",
+        "target": "3"
+      }
+    ],
+    "categories": [
+      {
+        "name": "5.1 自动驾驶领域的挑战"
+      },
+      {
+        "name": "5.2 自动驾驶未来在硬件、安全性、数据集和算力平台的预测"
+      },
+      {
+        "name": "5.3 深度强化学习在自动驾驶领域的未来应用预测"
+      },
+      {
+        "name": "5.4 自动驾驶中的 BEV 感知预测"
+      }
+    ]
+  } ;
+  graph.nodes.forEach(function (node) {
+    node.label = {
+      show: node.symbolSize > 5
+    };
+  });
+  option = {
+    // title: {
+    //   text: '',
+    //   subtext: '',
+    //   top: 'bottom',
+    //   left: 'right'
+    // },
+    tooltip: {},
+    legend: [
+      {
+        data: graph.categories.map(function (a) {
+          return a.name;
+        }),
+        top:'bottom',
+
+      }
+    ],
+    animationDurationUpdate: 1500,
+    animationEasingUpdate: 'quinticInOut',
+    
+    series: [
+      {
+        // radius:'15%',
+        // center:['10%','10%'],
+        name: '',
+        type: 'graph',
+        layout: 'circular',
+        
+        circular: {
+          rotateLabel: true
+        },
+        data: graph.nodes,
+        links: graph.links,
+        categories: graph.categories,
+        roam: true,
+        zoom: 0.5,
+        label: {
+          
+          position: 'right',
+          formatter: '{b}'
+        },
+        lineStyle: {
+          
+          color: 'source',
+          curveness: 0.3,
+          label: {
+            normal: {
+                show: false
+            }
+          }
+        },
+        itemStyle : {
+          normal : {
+            label : {
+              show : false
+            },
+            labelLine : {
+              show : false
+            }
+          },
+
+        },
+        
+      }
+    ]
+  };
+  myChart.setOption(option);
+
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
+</head>
+<body>
+  <div id="figure2" style="width: 1000px;height:500px;"></div>
+
+  
+    <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+
+  
+    <script type="text/javascript">
+      var dom = document.getElementById('figure2');
+      var myChart = echarts.init(dom, null, {
+        renderer: 'convas',
+        useDirtyRect: false
+      });
+      var app = {};
+      var option;
+  
+      option = {
+    title: {
+      text: ''
+    },
+    tooltip: {
+      trigger: 'axis',
+      confine: true, 
+      extraCssText: 'white-space: pre; word-break: break-all;'
+    },
+    legend: {
+      data: ['引用次数']
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
+      containLabel: true
+    },
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      axisLabel: {
+                  show: true,
+                  interval:0,
+                  rotate:40,
+                  textStyle: {
+                      color: '#333'
+                  }
+              },
+      data: ['LeNet-5', 'AlexNet', 'VGG-16', 'Inception-v1', 'Inception-v3', 'ResNet-50', 'Xception','Inception-v4','Inception-ResNet-V2','ResNeXt-50']
+    },
+    yAxis: {
+      type: 'value',
+      name: '引用次数',
+    },
+    
+    series: [
+       {
+        name: '引用次数',
+        type: 'line',
+        stack: 'Total',
+        showSymbol: true,//是否默认展示圆点
+                              symbolSize: 10,   //设定实心点的大小
+                               itemStyle: {
+                        normal: {
+                          color: "#5470c6", //改变折线点的颜色
+                          lineStyle: {
+                            color: "#5470c6", //改变折线颜色
+                          },
+                        },
+                      },
+        data: [47504, 113775, 79054, 40891, 21048, 118859, 9520, 11418, 11418, 6922]
+      },
+      
+      {
+        name: '发表时间',
+        type: 'line',
+        stack: 'Total',
+        data: ['1998年', '2012年', '2014年', '2015年', '2016年', '2016年', '2017年', '2017年', '2017年', '2017年']
+      },
+      
+      {
+        name: '论文名称',
+        type: 'line',
+        stack: 'Total',
+        data: [
+        'Gradient-Based Learning Applied to Document Recognition', 
+        'ImageNet Classification withDeep Convolutional Neural Networks',
+        'Very Deep Convolutional Networks for Large-Scale Image Recognition',
+        'Going Deeper with Convolutions',
+        'GRethinking the Inception Architecture for Computer Vision',
+        'Deep Residual Learning for Image Recognition',
+        'Xception: Deep Learning with Depthwise Separable Convolutions',
+        'Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learnin',
+        'Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learnin',
+        'Aggregated Residual Transformations for Deep Neural Networks']
+      },
+      {
+        name: '参数大小',
+        type: 'line',
+        stack: 'Total',
+        data: ['60,000', '60M', '138M', '5M', '24M', '26M', '23M', '43M', '56M', '25M']
+      },
+      {
+        name: '架构特点',
+        type: 'line',
+        stack: 'Total',
+        data: [
+        '用激活函数和池化层堆叠卷积, 并以一个或多个全连接层结束网络', 
+        '第一个采用 ReLU 做为激活函数',
+        '通过堆叠均匀卷积设计了更深的网络(大约是 AlexNet 的两倍)。',
+        '使用密集模块或块构建网络。\n(不是堆叠卷积层，而是堆叠模块或块)。', 
+        '最早使用批量归一化的算法之一',
+        '(1) 普及了跳过连接 \n(2) 在不影响模型泛化能力的情况下设计更深的 CNN\n(3) 最早使用批量标准化的算法之一',
+        '引入了完全基于深度可分离卷积层的 CNN。',
+        '对 Inception-v3 三点的改进：(1) 对 Stem 组和 Inception-C 模块做出细微变化；\n                                               (2) 为每个 Inception 块做出了统一的选择”；\n                                               (3) 提到” 剩余连接可以显着提高训练速度”。',
+        '与 Inception-v3 相比有三点改进：(1) 添加更多 Inception 模块。\n                                                      (2) 将 Inception 模块转换为 Residual Inception 块。\n                                                      (3) 在 Stem 模块后添加了新型的 Inception-A 模块。',
+        '在每个模块中添加了平行的塔/分支/路径。']
+        
+        }
+    ]
+  };
+  
+      if (option && typeof option === 'object') {
+        myChart.setOption(option);
+      }
+  
+      window.addEventListener('resize', myChart.resize);
+    </script>
+
+ 
+</body>
+</html>

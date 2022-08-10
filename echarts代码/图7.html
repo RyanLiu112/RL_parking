@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="figure4" style="width: 1000px;height:500px;"></div>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/jquery"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <script type="text/javascript">
+    var dom = document.getElementById('figure4');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+
+    myChart.showLoading();
+
+    
+  const data_4 = {"nodes": [
+   {"name": "训练数据集"},
+   {"name": "问题空间"},
+   {"name": "3D 跟踪"},
+   {"name": "NuScenes"},
+   {"name": "Ford"},
+   {"name": "KITTI"},
+   {"name": "Udacity"},
+   {"name": "Oxford"},
+   {"name":"Caltech"},
+   {"name": "物体检测"},
+   {"name": "CamVid"},
+   {"name": "Daimler pedestrian"},
+   {"name": "SLAM"},
+   {"name": "AMUSE"},
+   {"name": "语义理解"},
+   {"name": "Cityscapes"},
+   {"name": "目标分割"},
+   {"name": "分类与路径预测"},
+   {"name": "传感器设置"},
+   {"name": "雷达"},
+   {"name": "激光雷达"},
+   {"name": "GPS & IMU"},
+   {"name": "EgoData"},
+   {"name": "单目摄像机"},
+   {"name": "全向相机"},
+   {"name": "立体摄像头"},
+   {"name": "数据集大小"},
+   {"name": "100GB以下"},
+   {"name": "100GB~1TB"},
+   {"name": "1TB以上"},
+   {"name": "拍摄地点"},
+   {"name": "城市"},
+   {"name": "农村"},
+   {"name": "公路"}
+],
+"links": [
+   {"source": "训练数据集", "target": "问题空间", "value": 0.21},
+
+   {"source": "问题空间", "target": "3D 跟踪", "value": 0.06},
+   {"source": "3D 跟踪", "target": "NuScenes", "value": 0.01},
+   {"source": "3D 跟踪", "target": "Ford", "value": 0.01},
+   {"source": "3D 跟踪", "target": "KITTI", "value": 0.01},
+   {"source": "3D 跟踪", "target": "Udacity", "value": 0.01},
+   {"source": "3D 跟踪", "target": "Oxford", "value": 0.01},
+   {"source": "3D 跟踪", "target": "Caltech", "value": 0.01},
+
+   {"source": "问题空间", "target": "物体检测", "value": 0.075},
+   {"source": "物体检测", "target": "NuScenes", "value": 0.01},
+   {"source": "物体检测", "target": "Ford", "value": 0.01},
+   {"source": "物体检测", "target": "Udacity", "value": 0.005},
+   {"source": "物体检测", "target": "KITTI", "value": 0.01},
+   {"source": "物体检测", "target": "Oxford", "value": 0.01},
+   {"source": "物体检测", "target": "CamVid", "value": 0.01},
+   {"source": "物体检测", "target": "Caltech", "value": 0.01},
+   {"source": "物体检测", "target": "Daimler pedestrian", "value": 0.01},
+   
+   {"source": "问题空间", "target": "SLAM", "value": 0.025},
+   {"source": "SLAM", "target": "AMUSE", "value": 0.005},
+   {"source": "SLAM", "target": "KITTI", "value": 0.01},
+   {"source": "SLAM", "target": "Oxford", "value": 0.01},
+
+   {"source": "问题空间", "target": "语义理解", "value": 0.01},
+   {"source": "语义理解", "target": "Cityscapes", "value": 0.01},
+
+   {"source": "问题空间", "target": "目标分割", "value": 0.03},
+   {"source": "目标分割", "target": "CamVid", "value": 0.01},
+   {"source": "目标分割", "target": "Caltech", "value": 0.01},
+   {"source": "目标分割", "target": "Daimler pedestrian", "value": 0.01},
+
+   {"source": "问题空间", "target": "分类与路径预测", "value": 0.01},
+   {"source": "分类与路径预测", "target": "Daimler pedestrian", "value": 0.01},
+
+   
+   {"source": "训练数据集", "target": "传感器设置", "value": 0.225},
+
+   {"source": "传感器设置", "target": "雷达", "value": 0.01},
+   {"source": "雷达", "target": "NuScenes", "value": 0.01},
+
+   {"source": "传感器设置", "target": "激光雷达", "value": 0.03},
+   {"source": "激光雷达", "target": "NuScenes", "value": 0.01},
+   {"source": "激光雷达", "target": "Ford", "value": 0.01},
+   {"source": "激光雷达", "target": "Udacity", "value": 0.01},
+
+   {"source": "传感器设置", "target": "GPS & IMU", "value": 0.055},
+   {"source": "GPS & IMU", "target": "NuScenes", "value": 0.01},
+   {"source": "GPS & IMU", "target": "AMUSE", "value": 0.005},
+   {"source": "GPS & IMU", "target": "Ford", "value": 0.01},
+   {"source": "GPS & IMU", "target": "KITTI", "value": 0.01},
+   {"source": "GPS & IMU", "target": "Udacity", "value": 0.01},
+   {"source": "GPS & IMU", "target": "Oxford", "value": 0.01},
+
+   {"source": "传感器设置", "target": "EgoData", "value": 0.025},
+   {"source": "EgoData", "target": "NuScenes", "value": 0.01},
+   {"source": "EgoData", "target": "AMUSE", "value": 0.005},
+   {"source": "EgoData", "target": "Udacity", "value": 0.01},
+
+   {"source": "传感器设置", "target": "全向相机", "value": 0.015},
+   {"source": "全向相机", "target": "AMUSE", "value": 0.005},
+   {"source": "全向相机", "target": "Ford", "value": 0.01},
+
+   {"source": "传感器设置", "target": "单目摄像机", "value": 0.07},
+   {"source": "单目摄像机", "target": "NuScenes", "value": 0.01},
+   {"source": "单目摄像机", "target": "KITTI", "value": 0.01},
+   {"source": "单目摄像机", "target": "Udacity", "value": 0.01},
+   {"source": "单目摄像机", "target": "Oxford", "value": 0.01},
+   {"source": "单目摄像机", "target": "CamVid", "value": 0.01},
+   {"source": "单目摄像机", "target": "Caltech", "value": 0.01},
+   {"source": "单目摄像机", "target": "Daimler pedestrian", "value": 0.01},
+
+   {"source": "传感器设置", "target": "立体摄像头", "value" : 0.02},
+   {"source": "立体摄像头", "target": "Cityscapes", "value": 0.01},
+   {"source": "立体摄像头", "target": "Daimler pedestrian", "value": 0.01},
+
+
+   {"source": "训练数据集", "target": "数据集大小", "value": 0.095},
+
+   {"source": "数据集大小", "target": "100GB以下", "value": 0.05},
+   {"source": "100GB以下", "target": "Ford", "value": 0.01},
+   {"source": "100GB以下", "target": "Cityscapes", "value": 0.01},
+   {"source": "100GB以下", "target": "CamVid", "value": 0.01},
+   {"source": "100GB以下", "target": "Caltech", "value": 0.01},
+   {"source": "100GB以下", "target": "Daimler pedestrian", "value": 0.01},
+
+   {"source": "数据集大小", "target": "100GB~1TB", "value": 0.03},
+   {"source": "100GB~1TB", "target": "NuScenes", "value": 0.01},
+   {"source": "100GB~1TB", "target": "KITTI", "value": 0.01},
+   {"source": "100GB~1TB", "target": "Udacity", "value": 0.01},
+
+   {"source": "数据集大小", "target": "1TB以上", "value": 0.015},
+   {"source": "1TB以上", "target": "AMUSE", "value": 0.005},
+   {"source": "1TB以上", "target": "Oxford", "value": 0.01},
+
+
+   {"source": "训练数据集", "target": "拍摄地点", "value": 0.115},
+
+   {"source": "拍摄地点", "target": "城市", "value": 0.085},
+   {"source": "城市", "target": "NuScenes", "value": 0.01},
+   {"source": "城市", "target": "AMUSE", "value": 0.005},
+   {"source": "城市", "target": "Ford", "value": 0.01},
+   {"source": "城市", "target": "KITTI", "value": 0.01},
+   {"source": "城市", "target": "Cityscapes", "value": 0.01},
+   {"source": "城市", "target": "Oxford", "value": 0.01},
+   {"source": "城市", "target": "CamVid", "value": 0.01},
+   {"source": "城市", "target": "Caltech", "value": 0.01},
+   {"source": "城市", "target": "Daimler pedestrian", "value": 0.01},
+
+   {"source": "拍摄地点", "target": "农村", "value": 0.02},
+   {"source": "农村", "target": "KITTI", "value": 0.01},
+   {"source": "农村", "target": "Udacity", "value": 0.01},
+
+   {"source": "拍摄地点", "target": "公路", "value": 0.01},
+   {"source": "公路", "target": "Oxford", "value": 0.01}
+]};
+  myChart.hideLoading();
+  myChart.setOption(
+    (option = {
+      title: {
+        text: '自动驾驶系统训练数据集摘要',
+        left: 'center',
+      },
+      tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove'
+      },
+      series: [
+        {
+          type: 'sankey',
+          data: data_4.nodes,
+          links: data_4.links,
+          emphasis: {
+            focus: 'adjacency',
+          },
+          levels: [
+            {
+              depth: 0,
+              itemStyle: {
+                color: '#fbb4ae',
+              },
+              // textStyle: { //图例文字的样式
+              //   fontSize: 50
+              // }, 
+                           
+              lineStyle: {
+                color: 'source',
+                opacity: 0.6
+              }
+            },
+            {
+              depth: 1,
+              itemStyle: {
+                color: '#b3cde3'
+              },
+              lineStyle: {
+                color: 'source',
+                opacity: 0.6
+              }
+            },
+            {
+              depth: 2,
+              itemStyle: {
+                color: '#ccebc5'
+              },
+              lineStyle: {
+                color: 'source',
+                opacity: 0.6
+              }
+            },
+            {
+              depth: 3,
+              itemStyle: {
+                color: '#decbe4'
+              },
+              lineStyle: {
+                color: 'source',
+                opacity: 0.6
+              }
+            },
+          ],
+          lineStyle: {
+            curveness: 0.5
+          },
+          layoutIterations:0,
+        }
+      ]
+    })
+  );
+// });
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<meta charset="utf-8">
+
+
+  <div id="figure5" style="width: 1000px;height:800px;"></div>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/jquery"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <script type="text/javascript">
+    var dom = document.getElementById('figure5');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var option;
+    const updateFrequency1 = 500;
+const dimension = 0;
+const countryColors = {
+  "Convolutional Neural Network": '#00008b',
+  "Deep learning": '#f00',
+  "Reinforcement learning": '#ffde00',
+  Autodrive: '#002a8f'
+};
+$.when(
+  true
+  ).done(function () {
+  const res0 = [[
+    {
+        "code": "DL",
+        "emoji": "DL",
+        "unicode": "U+1F1E8 U+1F1F3",
+        "name": "Deep learning",
+        "title": "flag for China",
+        "dialCode": "+86"
+    },
+    {
+        "code": "RL",
+        "emoji": "RL",
+        "unicode": "U+1F1E8 U+1F1F3",
+        "name": "Reinforcement learning",
+        "title": "flag for China",
+        "dialCode": "+86"
+    },
+    {
+        "code": "AD",
+        "emoji": "AD",
+        "unicode": "U+1F1E8 U+1F1F3",
+        "name": "Autodrive",
+        "title": "flag for China",
+        "dialCode": "+86"
+    },
+    {
+        "code": "CNN",
+        "emoji": "CNN",
+        "unicode": "U+1F1E8 U+1F1F3",
+        "name": "Convolutional Neural Network",
+        "title": "flag for China",
+        "dialCode": "+86"
+    }
+  ]];
+  const res1 = [[["Income","Life Expectancy","Population","Country","Year"],
+[1,0,0,"Convolutional Neural Network",2004.01],[2,0,0,"Deep learning",2004.01],[13,0,0,"Reinforcement learning",2004.01],[1,0,0,"Autodrive",2004.01],[1,0,0,"Convolutional Neural Network",2004.02],[2,0,0,"Deep learning",2004.02],[7,0,0,"Reinforcement learning",2004.02],[1,0,0,"Autodrive",2004.02],[0,0,0,"Convolutional Neural Network",2004.03],[1,0,0,"Deep learning",2004.03],[13,0,0,"Reinforcement learning",2004.03],[4,0,0,"Autodrive",2004.03],[1,0,0,"Convolutional Neural Network",2004.04],[2,0,0,"Deep learning",2004.04],[12,0,0,"Reinforcement learning",2004.04],[2,0,0,"Autodrive",2004.04],[0,0,0,"Convolutional Neural Network",2004.05],[1,0,0,"Deep learning",2004.05],[12,0,0,"Reinforcement learning",2004.05],[2,0,0,"Autodrive",2004.05],[1,0,0,"Convolutional Neural Network",2004.06],[2,0,0,"Deep learning",2004.06],[8,0,0,"Reinforcement learning",2004.06],[1,0,0,"Autodrive",2004.06],[1,0,0,"Convolutional Neural Network",2004.07],[3,0,0,"Deep learning",2004.07],
+[9,0,0,"Reinforcement learning",2004.07],[0,0,0,"Autodrive",2004.07],[1,0,0,"Convolutional Neural Network",2004.08],[3,0,0,"Deep learning",2004.08],[8,0,0,"Reinforcement learning",2004.08],[2,0,0,"Autodrive",2004.08],[0,0,0,"Convolutional Neural Network",2004.09],[2,0,0,"Deep learning",2004.09],[7,0,0,"Reinforcement learning",2004.09],[2,0,0,"Autodrive",2004.09],[1,0,0,"Convolutional Neural Network",2004.10],[4,0,0,"Deep learning",2004.10],[10,0,0,"Reinforcement learning",2004.10],[1,0,0,"Autodrive",2004.10],[0,0,0,"Convolutional Neural Network",2004.11],[1,0,0,"Deep learning",2004.11],[11,0,0,"Reinforcement learning",2004.11],[1,0,0,"Autodrive",2004.11],[0,0,0,"Convolutional Neural Network",2004.12],[1,0,0,"Deep learning",2004.12],[8,0,0,"Reinforcement learning",2004.12],[1,0,0,"Autodrive",2004.12],[0,0,0,"Convolutional Neural Network",2005.01],[1,0,0,"Deep learning",2005.01],[5,0,0,"Reinforcement learning",2005.01],[1,0,0,"Autodrive",2005.01],
+[1,0,0,"Convolutional Neural Network",2005.02],[2,0,0,"Deep learning",2005.02],[10,0,0,"Reinforcement learning",2005.02],[2,0,0,"Autodrive",2005.02],[1,0,0,"Convolutional Neural Network",2005.03],[1,0,0,"Deep learning",2005.03],[9,0,0,"Reinforcement learning",2005.03],[1,0,0,"Autodrive",2005.03],[0,0,0,"Convolutional Neural Network",2005.04],[2,0,0,"Deep learning",2005.04],[8,0,0,"Reinforcement learning",2005.04],[2,0,0,"Autodrive",2005.04],[0,0,0,"Convolutional Neural Network",2005.05],[2,0,0,"Deep learning",2005.05],[7,0,0,"Reinforcement learning",2005.05],[1,0,0,"Autodrive",2005.05],[0,0,0,"Convolutional Neural Network",2005.06],[2,0,0,"Deep learning",2005.06],[9,0,0,"Reinforcement learning",2005.06],[1,0,0,"Autodrive",2005.06],[0,0,0,"Convolutional Neural Network",2005.07],[2,0,0,"Deep learning",2005.07],[8,0,0,"Reinforcement learning",2005.07],[1,0,0,"Autodrive",2005.07],[1,0,0,"Convolutional Neural Network",2005.08],[2,0,0,"Deep learning",2005.08],
+[6,0,0,"Reinforcement learning",2005.08],[1,0,0,"Autodrive",2005.08],[0,0,0,"Convolutional Neural Network",2005.09],[3,0,0,"Deep learning",2005.09],[6,0,0,"Reinforcement learning",2005.09],[1,0,0,"Autodrive",2005.09],[0,0,0,"Convolutional Neural Network",2005.10],[2,0,0,"Deep learning",2005.10],[6,0,0,"Reinforcement learning",2005.10],[1,0,0,"Autodrive",2005.10],[0,0,0,"Convolutional Neural Network",2005.11],[3,0,0,"Deep learning",2005.11],[7,0,0,"Reinforcement learning",2005.11],[1,0,0,"Autodrive",2005.11],[0,0,0,"Convolutional Neural Network",2005.12],[2,0,0,"Deep learning",2005.12],[9,0,0,"Reinforcement learning",2005.12],[1,0,0,"Autodrive",2005.12],[0,0,0,"Convolutional Neural Network",2006.01],[2,0,0,"Deep learning",2006.01],[6,0,0,"Reinforcement learning",2006.01],[1,0,0,"Autodrive",2006.01],[0,0,0,"Convolutional Neural Network",2006.02],[1,0,0,"Deep learning",2006.02],[9,0,0,"Reinforcement learning",2006.02],[2,0,0,"Autodrive",2006.02],
+[1,0,0,"Convolutional Neural Network",2006.03],[1,0,0,"Deep learning",2006.03],[6,0,0,"Reinforcement learning",2006.03],[1,0,0,"Autodrive",2006.03],[0,0,0,"Convolutional Neural Network",2006.04],[2,0,0,"Deep learning",2006.04],[7,0,0,"Reinforcement learning",2006.04],[1,0,0,"Autodrive",2006.04],[0,0,0,"Convolutional Neural Network",2006.05],[2,0,0,"Deep learning",2006.05],[6,0,0,"Reinforcement learning",2006.05],[1,0,0,"Autodrive",2006.05],[1,0,0,"Convolutional Neural Network",2006.06],[1,0,0,"Deep learning",2006.06],[5,0,0,"Reinforcement learning",2006.06],[1,0,0,"Autodrive",2006.06],[0,0,0,"Convolutional Neural Network",2006.07],[1,0,0,"Deep learning",2006.07],[3,0,0,"Reinforcement learning",2006.07],[1,0,0,"Autodrive",2006.07],[0,0,0,"Convolutional Neural Network",2006.08],[1,0,0,"Deep learning",2006.08],[5,0,0,"Reinforcement learning",2006.08],[2,0,0,"Autodrive",2006.08],[0,0,0,"Convolutional Neural Network",2006.09],[1,0,0,"Deep learning",2006.09],
+[4,0,0,"Reinforcement learning",2006.09],[1,0,0,"Autodrive",2006.09],[1,0,0,"Convolutional Neural Network",2006.10],[3,0,0,"Deep learning",2006.10],[5,0,0,"Reinforcement learning",2006.10],[1,0,0,"Autodrive",2006.10],[0,0,0,"Convolutional Neural Network",2006.11],[1,0,0,"Deep learning",2006.11],[7,0,0,"Reinforcement learning",2006.11],[1,0,0,"Autodrive",2006.11],[0,0,0,"Convolutional Neural Network",2006.12],[1,0,0,"Deep learning",2006.12],[6,0,0,"Reinforcement learning",2006.12],[1,0,0,"Autodrive",2006.12],[1,0,0,"Convolutional Neural Network",2007.01],[2,0,0,"Deep learning",2007.01],[5,0,0,"Reinforcement learning",2007.01],[1,0,0,"Autodrive",2007.01],[0,0,0,"Convolutional Neural Network",2007.02],[2,0,0,"Deep learning",2007.02],[5,0,0,"Reinforcement learning",2007.02],[1,0,0,"Autodrive",2007.02],[1,0,0,"Convolutional Neural Network",2007.03],[2,0,0,"Deep learning",2007.03],[7,0,0,"Reinforcement learning",2007.03],[1,0,0,"Autodrive",2007.03],
+[1,0,0,"Convolutional Neural Network",2007.04],[1,0,0,"Deep learning",2007.04],[5,0,0,"Reinforcement learning",2007.04],[1,0,0,"Autodrive",2007.04],[1,0,0,"Convolutional Neural Network",2007.05],[2,0,0,"Deep learning",2007.05],[6,0,0,"Reinforcement learning",2007.05],[1,0,0,"Autodrive",2007.05],[0,0,0,"Convolutional Neural Network",2007.06],[2,0,0,"Deep learning",2007.06],[4,0,0,"Reinforcement learning",2007.06],[1,0,0,"Autodrive",2007.06],[1,0,0,"Convolutional Neural Network",2007.07],[2,0,0,"Deep learning",2007.07],[4,0,0,"Reinforcement learning",2007.07],[1,0,0,"Autodrive",2007.07],[0,0,0,"Convolutional Neural Network",2007.08],[1,0,0,"Deep learning",2007.08],[3,0,0,"Reinforcement learning",2007.08],[1,0,0,"Autodrive",2007.08],[1,0,0,"Convolutional Neural Network",2007.09],[2,0,0,"Deep learning",2007.09],[3,0,0,"Reinforcement learning",2007.09],[1,0,0,"Autodrive",2007.09],[1,0,0,"Convolutional Neural Network",2007.10],[2,0,0,"Deep learning",2007.10],
+[5,0,0,"Reinforcement learning",2007.10],[1,0,0,"Autodrive",2007.10],[0,0,0,"Convolutional Neural Network",2007.11],[2,0,0,"Deep learning",2007.11],[4,0,0,"Reinforcement learning",2007.11],[1,0,0,"Autodrive",2007.11],[1,0,0,"Convolutional Neural Network",2007.12],[1,0,0,"Deep learning",2007.12],[4,0,0,"Reinforcement learning",2007.12],[1,0,0,"Autodrive",2007.12],[0,0,0,"Convolutional Neural Network",2008.01],[1,0,0,"Deep learning",2008.01],[5,0,0,"Reinforcement learning",2008.01],[1,0,0,"Autodrive",2008.01],[0,0,0,"Convolutional Neural Network",2008.02],[2,0,0,"Deep learning",2008.02],[5,0,0,"Reinforcement learning",2008.02],[1,0,0,"Autodrive",2008.02],[1,0,0,"Convolutional Neural Network",2008.03],[1,0,0,"Deep learning",2008.03],[5,0,0,"Reinforcement learning",2008.03],[2,0,0,"Autodrive",2008.03],[0,0,0,"Convolutional Neural Network",2008.04],[2,0,0,"Deep learning",2008.04],[5,0,0,"Reinforcement learning",2008.04],[2,0,0,"Autodrive",2008.04],
+[1,0,0,"Convolutional Neural Network",2008.05],[1,0,0,"Deep learning",2008.05],[5,0,0,"Reinforcement learning",2008.05],[2,0,0,"Autodrive",2008.05],[0,0,0,"Convolutional Neural Network",2008.06],[2,0,0,"Deep learning",2008.06],[4,0,0,"Reinforcement learning",2008.06],[2,0,0,"Autodrive",2008.06],[0,0,0,"Convolutional Neural Network",2008.07],[1,0,0,"Deep learning",2008.07],[3,0,0,"Reinforcement learning",2008.07],[1,0,0,"Autodrive",2008.07],[1,0,0,"Convolutional Neural Network",2008.08],[2,0,0,"Deep learning",2008.08],[3,0,0,"Reinforcement learning",2008.08],[1,0,0,"Autodrive",2008.08],[0,0,0,"Convolutional Neural Network",2008.09],[2,0,0,"Deep learning",2008.09],[4,0,0,"Reinforcement learning",2008.09],[2,0,0,"Autodrive",2008.09],[1,0,0,"Convolutional Neural Network",2008.10],[1,0,0,"Deep learning",2008.10],[5,0,0,"Reinforcement learning",2008.10],[1,0,0,"Autodrive",2008.10],[0,0,0,"Convolutional Neural Network",2008.11],[1,0,0,"Deep learning",2008.11],
+[5,0,0,"Reinforcement learning",2008.11],[2,0,0,"Autodrive",2008.11],[1,0,0,"Convolutional Neural Network",2008.12],[1,0,0,"Deep learning",2008.12],[3,0,0,"Reinforcement learning",2008.12],[2,0,0,"Autodrive",2008.12],[0,0,0,"Convolutional Neural Network",2009.01],[1,0,0,"Deep learning",2009.01],[4,0,0,"Reinforcement learning",2009.01],[2,0,0,"Autodrive",2009.01],[1,0,0,"Convolutional Neural Network",2009.02],[1,0,0,"Deep learning",2009.02],[5,0,0,"Reinforcement learning",2009.02],[1,0,0,"Autodrive",2009.02],[0,0,0,"Convolutional Neural Network",2009.03],[2,0,0,"Deep learning",2009.03],[5,0,0,"Reinforcement learning",2009.03],[1,0,0,"Autodrive",2009.03],[1,0,0,"Convolutional Neural Network",2009.04],[1,0,0,"Deep learning",2009.04],[5,0,0,"Reinforcement learning",2009.04],[2,0,0,"Autodrive",2009.04],[1,0,0,"Convolutional Neural Network",2009.05],[2,0,0,"Deep learning",2009.05],[4,0,0,"Reinforcement learning",2009.05],[1,0,0,"Autodrive",2009.05],
+[1,0,0,"Convolutional Neural Network",2009.06],[2,0,0,"Deep learning",2009.06],[4,0,0,"Reinforcement learning",2009.06],[1,0,0,"Autodrive",2009.06],[1,0,0,"Convolutional Neural Network",2009.07],[1,0,0,"Deep learning",2009.07],[3,0,0,"Reinforcement learning",2009.07],[2,0,0,"Autodrive",2009.07],[1,0,0,"Convolutional Neural Network",2009.08],[1,0,0,"Deep learning",2009.08],[4,0,0,"Reinforcement learning",2009.08],[2,0,0,"Autodrive",2009.08],[1,0,0,"Convolutional Neural Network",2009.09],[2,0,0,"Deep learning",2009.09],[4,0,0,"Reinforcement learning",2009.09],[1,0,0,"Autodrive",2009.09],[1,0,0,"Convolutional Neural Network",2009.10],[2,0,0,"Deep learning",2009.10],[6,0,0,"Reinforcement learning",2009.10],[1,0,0,"Autodrive",2009.10],[1,0,0,"Convolutional Neural Network",2009.11],[2,0,0,"Deep learning",2009.11],[5,0,0,"Reinforcement learning",2009.11],[1,0,0,"Autodrive",2009.11],[1,0,0,"Convolutional Neural Network",2009.12],
+[1,0,0,"Deep learning",2009.12],[3,0,0,"Reinforcement learning",2009.12],[1,0,0,"Autodrive",2009.12],[1,0,0,"Convolutional Neural Network",2010.01],[2,0,0,"Deep learning",2010.01],[4,0,0,"Reinforcement learning",2010.01],[2,0,0,"Autodrive",2010.01],[1,0,0,"Convolutional Neural Network",2010.02],[2,0,0,"Deep learning",2010.02],[4,0,0,"Reinforcement learning",2010.02],[2,0,0,"Autodrive",2010.02],[1,0,0,"Convolutional Neural Network",2010.03],[2,0,0,"Deep learning",2010.03],[4,0,0,"Reinforcement learning",2010.03],[2,0,0,"Autodrive",2010.03],[1,0,0,"Convolutional Neural Network",2010.04],[2,0,0,"Deep learning",2010.04],[5,0,0,"Reinforcement learning",2010.04],
+[2,0,0,"Autodrive",2010.04],[1,0,0,"Convolutional Neural Network",2010.05],[2,0,0,"Deep learning",2010.05],[4,0,0,"Reinforcement learning",2010.05],[2,0,0,"Autodrive",2010.05],[1,0,0,"Convolutional Neural Network",2010.06],[2,0,0,"Deep learning",2010.06],[3,0,0,"Reinforcement learning",2010.06],[2,0,0,"Autodrive",2010.06],[1,0,0,"Convolutional Neural Network",2010.07],[2,0,0,"Deep learning",2010.07],[4,0,0,"Reinforcement learning",2010.07],[1,0,0,"Autodrive",2010.07],[1,0,0,"Convolutional Neural Network",2010.08],[1,0,0,"Deep learning",2010.08],[3,0,0,"Reinforcement learning",2010.08],[2,0,0,"Autodrive",2010.08],[1,0,0,"Convolutional Neural Network",2010.09],[2,0,0,"Deep learning",2010.09],[3,0,0,"Reinforcement learning",2010.09],[1,0,0,"Autodrive",2010.09],
+[1,0,0,"Convolutional Neural Network",2010.10],[2,0,0,"Deep learning",2010.10],[4,0,0,"Reinforcement learning",2010.10],[2,0,0,"Autodrive",2010.10],[1,0,0,"Convolutional Neural Network",2010.11],[2,0,0,"Deep learning",2010.11],[5,0,0,"Reinforcement learning",2010.11],[1,0,0,"Autodrive",2010.11],[1,0,0,"Convolutional Neural Network",2010.12],[2,0,0,"Deep learning",2010.12],[4,0,0,"Reinforcement learning",2010.12],[1,0,0,"Autodrive",2010.12],[1,0,0,"Convolutional Neural Network",2011.01],[2,0,0,"Deep learning",2011.01],[4,0,0,"Reinforcement learning",2011.01],[2,0,0,"Autodrive",2011.01],[1,0,0,"Convolutional Neural Network",2011.02],
+[2,0,0,"Deep learning",2011.02],[4,0,0,"Reinforcement learning",2011.02],[2,0,0,"Autodrive",2011.02],[1,0,0,"Convolutional Neural Network",2011.03],[2,0,0,"Deep learning",2011.03],[4,0,0,"Reinforcement learning",2011.03],[2,0,0,"Autodrive",2011.03],[1,0,0,"Convolutional Neural Network",2011.04],[2,0,0,"Deep learning",2011.04],[4,0,0,"Reinforcement learning",2011.04],[2,0,0,"Autodrive",2011.04],[1,0,0,"Convolutional Neural Network",2011.05],[2,0,0,"Deep learning",2011.05],[3,0,0,"Reinforcement learning",2011.05],[2,0,0,"Autodrive",2011.05],[1,0,0,"Convolutional Neural Network",2011.06],[2,0,0,"Deep learning",2011.06],[3,0,0,"Reinforcement learning",2011.06],[1,0,0,"Autodrive",2011.06],[1,0,0,"Convolutional Neural Network",2011.07],[2,0,0,"Deep learning",2011.07],
+[3,0,0,"Reinforcement learning",2011.07],[2,0,0,"Autodrive",2011.07],[1,0,0,"Convolutional Neural Network",2011.08],[2,0,0,"Deep learning",2011.08],[2,0,0,"Reinforcement learning",2011.08],[1,0,0,"Autodrive",2011.08],[1,0,0,"Convolutional Neural Network",2011.09],[2,0,0,"Deep learning",2011.09],[3,0,0,"Reinforcement learning",2011.09],[1,0,0,"Autodrive",2011.09],[1,0,0,"Convolutional Neural Network",2011.10],[2,0,0,"Deep learning",2011.10],[4,0,0,"Reinforcement learning",2011.10],[1,0,0,"Autodrive",2011.10],[1,0,0,"Convolutional Neural Network",2011.11],[2,0,0,"Deep learning",2011.11],[5,0,0,"Reinforcement learning",2011.11],[2,0,0,"Autodrive",2011.11],[1,0,0,"Convolutional Neural Network",2011.12],[2,0,0,"Deep learning",2011.12],[3,0,0,"Reinforcement learning",2011.12],[1,0,0,"Autodrive",2011.12],[1,0,0,"Convolutional Neural Network",2012.01],[2,0,0,"Deep learning",2012.01],[3,0,0,"Reinforcement learning",2012.01],
+[2,0,0,"Autodrive",2012.01],[1,0,0,"Convolutional Neural Network",2012.02],[2,0,0,"Deep learning",2012.02],[4,0,0,"Reinforcement learning",2012.02],[2,0,0,"Autodrive",2012.02],[1,0,0,"Convolutional Neural Network",2012.03],[2,0,0,"Deep learning",2012.03],[4,0,0,"Reinforcement learning",2012.03],[2,0,0,"Autodrive",2012.03],[1,0,0,"Convolutional Neural Network",2012.04],[2,0,0,"Deep learning",2012.04],[4,0,0,"Reinforcement learning",2012.04],[2,0,0,"Autodrive",2012.04],[0,0,0,"Convolutional Neural Network",2012.05],[2,0,0,"Deep learning",2012.05],[3,0,0,"Reinforcement learning",2012.05],[2,0,0,"Autodrive",2012.05],[1,0,0,"Convolutional Neural Network",2012.06],[2,0,0,"Deep learning",2012.06],[4,0,0,"Reinforcement learning",2012.06],[2,0,0,"Autodrive",2012.06],[1,0,0,"Convolutional Neural Network",2012.07],
+[2,0,0,"Deep learning",2012.07],[3,0,0,"Reinforcement learning",2012.07],[2,0,0,"Autodrive",2012.07],[1,0,0,"Convolutional Neural Network",2012.08],[2,0,0,"Deep learning",2012.08],[2,0,0,"Reinforcement learning",2012.08],[2,0,0,"Autodrive",2012.08],[1,0,0,"Convolutional Neural Network",2012.09],[2,0,0,"Deep learning",2012.09],[4,0,0,"Reinforcement learning",2012.09],[2,0,0,"Autodrive",2012.09],[1,0,0,"Convolutional Neural Network",2012.10],[3,0,0,"Deep learning",2012.10],[5,0,0,"Reinforcement learning",2012.10],[2,0,0,"Autodrive",2012.10],[1,0,0,"Convolutional Neural Network",2012.11],[4,0,0,"Deep learning",2012.11],[4,0,0,"Reinforcement learning",2012.11],[1,0,0,"Autodrive",2012.11],[1,0,0,"Convolutional Neural Network",2012.12],[3,0,0,"Deep learning",2012.12],[3,0,0,"Reinforcement learning",2012.12],[1,0,0,"Autodrive",2012.12],[1,0,0,"Convolutional Neural Network",2013.01],[3,0,0,"Deep learning",2013.01],[3,0,0,"Reinforcement learning",2013.01],[2,0,0,"Autodrive",2013.01],
+[1,0,0,"Convolutional Neural Network",2013.02],[3,0,0,"Deep learning",2013.02],[4,0,0,"Reinforcement learning",2013.02],[1,0,0,"Autodrive",2013.02],[1,0,0,"Convolutional Neural Network",2013.03],[4,0,0,"Deep learning",2013.03],[4,0,0,"Reinforcement learning",2013.03],[2,0,0,"Autodrive",2013.03],[1,0,0,"Convolutional Neural Network",2013.04],[4,0,0,"Deep learning",2013.04],[4,0,0,"Reinforcement learning",2013.04],[2,0,0,"Autodrive",2013.04],[1,0,0,"Convolutional Neural Network",2013.05],[4,0,0,"Deep learning",2013.05],[3,0,0,"Reinforcement learning",2013.05],[2,0,0,"Autodrive",2013.05],[1,0,0,"Convolutional Neural Network",2013.06],[5,0,0,"Deep learning",2013.06],[3,0,0,"Reinforcement learning",2013.06],[1,0,0,"Autodrive",2013.06],[1,0,0,"Convolutional Neural Network",2013.07],[4,0,0,"Deep learning",2013.07],[3,0,0,"Reinforcement learning",2013.07],[2,0,0,"Autodrive",2013.07],[1,0,0,"Convolutional Neural Network",2013.08],[4,0,0,"Deep learning",2013.08],[2,0,0,"Reinforcement learning",2013.08],[1,0,0,"Autodrive",2013.08],[1,0,0,"Convolutional Neural Network",2013.09],
+[5,0,0,"Deep learning",2013.09],[3,0,0,"Reinforcement learning",2013.09],[1,0,0,"Autodrive",2013.09],[1,0,0,"Convolutional Neural Network",2013.10],[6,0,0,"Deep learning",2013.10],[4,0,0,"Reinforcement learning",2013.10],[1,0,0,"Autodrive",2013.10],[1,0,0,"Convolutional Neural Network",2013.11],[5,0,0,"Deep learning",2013.11],[4,0,0,"Reinforcement learning",2013.11],[1,0,0,"Autodrive",2013.11],[1,0,0,"Convolutional Neural Network",2013.12],[6,0,0,"Deep learning",2013.12],[3,0,0,"Reinforcement learning",2013.12],[1,0,0,"Autodrive",2013.12],[1,0,0,"Convolutional Neural Network",2014.01],[6,0,0,"Deep learning",2014.01],[4,0,0,"Reinforcement learning",2014.01],[1,0,0,"Autodrive",2014.01],[1,0,0,"Convolutional Neural Network",2014.02],[7,0,0,"Deep learning",2014.02],[5,0,0,"Reinforcement learning",2014.02],[1,0,0,"Autodrive",2014.02],[1,0,0,"Convolutional Neural Network",2014.03],[7,0,0,"Deep learning",2014.03],[5,0,0,"Reinforcement learning",2014.03],[2,0,0,"Autodrive",2014.03],[1,0,0,"Convolutional Neural Network",2014.04],[7,0,0,"Deep learning",2014.04],[4,0,0,"Reinforcement learning",2014.04],[1,0,0,"Autodrive",2014.04],[1,0,0,"Convolutional Neural Network",2014.05],[8,0,0,"Deep learning",2014.05],[3,0,0,"Reinforcement learning",2014.05],[1,0,0,"Autodrive",2014.05],[1,0,0,"Convolutional Neural Network",2014.06],[7,0,0,"Deep learning",2014.06],[3,0,0,"Reinforcement learning",2014.06],[1,0,0,"Autodrive",2014.06],[1,0,0,"Convolutional Neural Network",2014.07],[7,0,0,"Deep learning",2014.07],[3,0,0,"Reinforcement learning",2014.07],
+[1,0,0,"Autodrive",2014.07],[1,0,0,"Convolutional Neural Network",2014.08],[7,0,0,"Deep learning",2014.08],[3,0,0,"Reinforcement learning",2014.08],[1,0,0,"Autodrive",2014.08],[1,0,0,"Convolutional Neural Network",2014.09],[8,0,0,"Deep learning",2014.09],[4,0,0,"Reinforcement learning",2014.09],[2,0,0,"Autodrive",2014.09],[1,0,0,"Convolutional Neural Network",2014.10],[9,0,0,"Deep learning",2014.10],[5,0,0,"Reinforcement learning",2014.10],[1,0,0,"Autodrive",2014.10],[1,0,0,"Convolutional Neural Network",2014.11],[8,0,0,"Deep learning",2014.11],[4,0,0,"Reinforcement learning",2014.11],[1,0,0,"Autodrive",2014.11],[1,0,0,"Convolutional Neural Network",2014.12],[13,0,0,"Deep learning",2014.12],[4,0,0,"Reinforcement learning",2014.12],[1,0,0,"Autodrive",2014.12],[1,0,0,"Convolutional Neural Network",2015.01],[14,0,0,"Deep learning",2015.01],[3,0,0,"Reinforcement learning",2015.01],[1,0,0,"Autodrive",2015.01],[2,0,0,"Convolutional Neural Network",2015.02],[14,0,0,"Deep learning",2015.02],[5,0,0,"Reinforcement learning",2015.02],[2,0,0,"Autodrive",2015.02],[1,0,0,"Convolutional Neural Network",2015.03],[16,0,0,"Deep learning",2015.03],[5,0,0,"Reinforcement learning",2015.03],[2,0,0,"Autodrive",2015.03],[2,0,0,"Convolutional Neural Network",2015.04],[13,0,0,"Deep learning",2015.04],[4,0,0,"Reinforcement learning",2015.04],[2,0,0,"Autodrive",2015.04],
+[1,0,0,"Convolutional Neural Network",2015.05],[14,0,0,"Deep learning",2015.05],[4,0,0,"Reinforcement learning",2015.05],[2,0,0,"Autodrive",2015.05],[2,0,0,"Convolutional Neural Network",2015.06],[16,0,0,"Deep learning",2015.06],[4,0,0,"Reinforcement learning",2015.06],[2,0,0,"Autodrive",2015.06],[2,0,0,"Convolutional Neural Network",2015.07],[17,0,0,"Deep learning",2015.07],[3,0,0,"Reinforcement learning",2015.07],[1,0,0,"Autodrive",2015.07],[1,0,0,"Convolutional Neural Network",2015.08],[16,0,0,"Deep learning",2015.08],[3,0,0,"Reinforcement learning",2015.08],[1,0,0,"Autodrive",2015.08],[2,0,0,"Convolutional Neural Network",2015.09],[16,0,0,"Deep learning",2015.09],[4,0,0,"Reinforcement learning",2015.09],[1,0,0,"Autodrive",2015.09],[2,0,0,"Convolutional Neural Network",2015.10],[18,0,0,"Deep learning",2015.10],[6,0,0,"Reinforcement learning",2015.10],[2,0,0,"Autodrive",2015.10],[2,0,0,"Convolutional Neural Network",2015.11],[20,0,0,"Deep learning",2015.11],[5,0,0,"Reinforcement learning",2015.11],[1,0,0,"Autodrive",2015.11],[2,0,0,"Convolutional Neural Network",2015.12],
+[20,0,0,"Deep learning",2015.12],[5,0,0,"Reinforcement learning",2015.12],[1,0,0,"Autodrive",2015.12],[2,0,0,"Convolutional Neural Network",2016.01],[24,0,0,"Deep learning",2016.01],[4,0,0,"Reinforcement learning",2016.01],[1,0,0,"Autodrive",2016.01],[2,0,0,"Convolutional Neural Network",2016.02],[23,0,0,"Deep learning",2016.02],[5,0,0,"Reinforcement learning",2016.02],[2,0,0,"Autodrive",2016.02],[3,0,0,"Convolutional Neural Network",2016.03],[30,0,0,"Deep learning",2016.03],[6,0,0,"Reinforcement learning",2016.03],[1,0,0,"Autodrive",2016.03],[3,0,0,"Convolutional Neural Network",2016.04],[30,0,0,"Deep learning",2016.04],[6,0,0,"Reinforcement learning",2016.04],[2,0,0,"Autodrive",2016.04],[3,0,0,"Convolutional Neural Network",2016.05],[29,0,0,"Deep learning",2016.05],[6,0,0,"Reinforcement learning",2016.05],
+[2,0,0,"Autodrive",2016.05],[3,0,0,"Convolutional Neural Network",2016.06],[31,0,0,"Deep learning",2016.06],[5,0,0,"Reinforcement learning",2016.06],[1,0,0,"Autodrive",2016.06],[3,0,0,"Convolutional Neural Network",2016.07],[29,0,0,"Deep learning",2016.07],[5,0,0,"Reinforcement learning",2016.07],[2,0,0,"Autodrive",2016.07],[3,0,0,"Convolutional Neural Network",2016.08],[28,0,0,"Deep learning",2016.08],[4,0,0,"Reinforcement learning",2016.08],[2,0,0,"Autodrive",2016.08],[3,0,0,"Convolutional Neural Network",2016.09],[33,0,0,"Deep learning",2016.09],[6,0,0,"Reinforcement learning",2016.09],[1,0,0,"Autodrive",2016.09],[3,0,0,"Convolutional Neural Network",2016.10],[36,0,0,"Deep learning",2016.10],[7,0,0,"Reinforcement learning",2016.10],[1,0,0,"Autodrive",2016.10],[4,0,0,"Convolutional Neural Network",2016.11],[39,0,0,"Deep learning",2016.11],[9,0,0,"Reinforcement learning",2016.11],[2,0,0,"Autodrive",2016.11],[4,0,0,"Convolutional Neural Network",2016.12],[39,0,0,"Deep learning",2016.12],[8,0,0,"Reinforcement learning",2016.12],[1,0,0,"Autodrive",2016.12],
+[4,0,0,"Convolutional Neural Network",2017.01],[43,0,0,"Deep learning",2017.01],[7,0,0,"Reinforcement learning",2017.01],[2,0,0,"Autodrive",2017.01],[5,0,0,"Convolutional Neural Network",2017.02],[46,0,0,"Deep learning",2017.02],[11,0,0,"Reinforcement learning",2017.02],[1,0,0,"Autodrive",2017.02],[5,0,0,"Convolutional Neural Network",2017.03],[52,0,0,"Deep learning",2017.03],[11,0,0,"Reinforcement learning",2017.03],[2,0,0,"Autodrive",2017.03],[5,0,0,"Convolutional Neural Network",2017.04],[51,0,0,"Deep learning",2017.04],[11,0,0,"Reinforcement learning",2017.04],[2,0,0,"Autodrive",2017.04],[6,0,0,"Convolutional Neural Network",2017.05],[52,0,0,"Deep learning",2017.05],[10,0,0,"Reinforcement learning",2017.05],[2,0,0,"Autodrive",2017.05],[5,0,0,"Convolutional Neural Network",2017.06],[51,0,0,"Deep learning",2017.06],[9,0,0,"Reinforcement learning",2017.06],[2,0,0,"Autodrive",2017.06],[5,0,0,"Convolutional Neural Network",2017.07],[48,0,0,"Deep learning",2017.07],[8,0,0,"Reinforcement learning",2017.07],[2,0,0,"Autodrive",2017.07],[5,0,0,"Convolutional Neural Network",2017.08],[56,0,0,"Deep learning",2017.08],[10,0,0,"Reinforcement learning",2017.08],[2,0,0,"Autodrive",2017.08],[5,0,0,"Convolutional Neural Network",2017.09],
+[58,0,0,"Deep learning",2017.09],[11,0,0,"Reinforcement learning",2017.09],[2,0,0,"Autodrive",2017.09],[6,0,0,"Convolutional Neural Network",2017.10],[70,0,0,"Deep learning",2017.10],[16,0,0,"Reinforcement learning",2017.10],[2,0,0,"Autodrive",2017.10],[7,0,0,"Convolutional Neural Network",2017.11],[72,0,0,"Deep learning",2017.11],[15,0,0,"Reinforcement learning",2017.11],[2,0,0,"Autodrive",2017.11],[6,0,0,"Convolutional Neural Network",2017.12],[66,0,0,"Deep learning",2017.12],[15,0,0,"Reinforcement learning",2017.12],[1,0,0,"Autodrive",2017.12],[6,0,0,"Convolutional Neural Network",2018.01],[72,0,0,"Deep learning",2018.01],[13,0,0,"Reinforcement learning",2018.01],[2,0,0,"Autodrive",2018.01],[6,0,0,"Convolutional Neural Network",2018.02],[70,0,0,"Deep learning",2018.02],[13,0,0,"Reinforcement learning",2018.02],[2,0,0,"Autodrive",2018.02],[7,0,0,"Convolutional Neural Network",2018.03],[74,0,0,"Deep learning",2018.03],[15,0,0,"Reinforcement learning",2018.03],[2,0,0,"Autodrive",2018.03],[7,0,0,"Convolutional Neural Network",2018.04],[69,0,0,"Deep learning",2018.04],[15,0,0,"Reinforcement learning",2018.04],[2,0,0,"Autodrive",2018.04],[7,0,0,"Convolutional Neural Network",2018.05],[72,0,0,"Deep learning",2018.05],[15,0,0,"Reinforcement learning",2018.05],[2,0,0,"Autodrive",2018.05],[6,0,0,"Convolutional Neural Network",2018.06],[69,0,0,"Deep learning",2018.06],
+[14,0,0,"Reinforcement learning",2018.06],[1,0,0,"Autodrive",2018.06],[6,0,0,"Convolutional Neural Network",2018.07],[67,0,0,"Deep learning",2018.07],[13,0,0,"Reinforcement learning",2018.07],[2,0,0,"Autodrive",2018.07],[6,0,0,"Convolutional Neural Network",2018.08],[66,0,0,"Deep learning",2018.08],[13,0,0,"Reinforcement learning",2018.08],[2,0,0,"Autodrive",2018.08],[6,0,0,"Convolutional Neural Network",2018.09],[72,0,0,"Deep learning",2018.09],[15,0,0,"Reinforcement learning",2018.09],[2,0,0,"Autodrive",2018.09],[7,0,0,"Convolutional Neural Network",2018.10],[79,0,0,"Deep learning",2018.10],[18,0,0,"Reinforcement learning",2018.10],[2,0,0,"Autodrive",2018.10],[7,0,0,"Convolutional Neural Network",2018.11],[77,0,0,"Deep learning",2018.11],[17,0,0,"Reinforcement learning",2018.11],[1,0,0,"Autodrive",2018.11],[6,0,0,"Convolutional Neural Network",2018.12],[63,0,0,"Deep learning",2018.12],[15,0,0,"Reinforcement learning",2018.12],[2,0,0,"Autodrive",2018.12],[6,0,0,"Convolutional Neural Network",2019.01],[73,0,0,"Deep learning",2019.01],[15,0,0,"Reinforcement learning",2019.01],[2,0,0,"Autodrive",2019.01],[7,0,0,"Convolutional Neural Network",2019.02],[74,0,0,"Deep learning",2019.02],[17,0,0,"Reinforcement learning",2019.02],[2,0,0,"Autodrive",2019.02],[7,0,0,"Convolutional Neural Network",2019.03],[77,0,0,"Deep learning",2019.03],[17,0,0,"Reinforcement learning",2019.03],[2,0,0,"Autodrive",2019.03],[7,0,0,"Convolutional Neural Network",2019.04],[76,0,0,"Deep learning",2019.04],[17,0,0,"Reinforcement learning",2019.04],
+[2,0,0,"Autodrive",2019.04],[7,0,0,"Convolutional Neural Network",2019.05],[74,0,0,"Deep learning",2019.05],[17,0,0,"Reinforcement learning",2019.05],[2,0,0,"Autodrive",2019.05],[6,0,0,"Convolutional Neural Network",2019.06],[75,0,0,"Deep learning",2019.06],[15,0,0,"Reinforcement learning",2019.06],[2,0,0,"Autodrive",2019.06],[6,0,0,"Convolutional Neural Network",2019.07],[73,0,0,"Deep learning",2019.07],[16,0,0,"Reinforcement learning",2019.07],[2,0,0,"Autodrive",2019.07],[5,0,0,"Convolutional Neural Network",2019.08],[70,0,0,"Deep learning",2019.08],[15,0,0,"Reinforcement learning",2019.08],[2,0,0,"Autodrive",2019.08],[6,0,0,"Convolutional Neural Network",2019.09],[76,0,0,"Deep learning",2019.09],[18,0,0,"Reinforcement learning",2019.09],[2,0,0,"Autodrive",2019.09],[7,0,0,"Convolutional Neural Network",2019.10],[75,0,0,"Deep learning",2019.10],[19,0,0,"Reinforcement learning",2019.10],[2,0,0,"Autodrive",2019.10],[7,0,0,"Convolutional Neural Network",2019.11],[73,0,0,"Deep learning",2019.11],[18,0,0,"Reinforcement learning",2019.11],[2,0,0,"Autodrive",2019.11],[6,0,0,"Convolutional Neural Network",2019.12],[71,0,0,"Deep learning",2019.12],[17,0,0,"Reinforcement learning",2019.12],[2,0,0,"Autodrive",2019.12],[6,0,0,"Convolutional Neural Network",2020.01],[74,0,0,"Deep learning",2020.01],[16,0,0,"Reinforcement learning",2020.01],[2,0,0,"Autodrive",2020.01],
+[6,0,0,"Convolutional Neural Network",2020.02],[77,0,0,"Deep learning",2020.02],[18,0,0,"Reinforcement learning",2020.02],[2,0,0,"Autodrive",2020.02],[6,0,0,"Convolutional Neural Network",2020.03],[65,0,0,"Deep learning",2020.03],[16,0,0,"Reinforcement learning",2020.03],[2,0,0,"Autodrive",2020.03],[6,0,0,"Convolutional Neural Network",2020.04],[73,0,0,"Deep learning",2020.04],[18,0,0,"Reinforcement learning",2020.04],[3,0,0,"Autodrive",2020.04],[6,0,0,"Convolutional Neural Network",2020.05],[75,0,0,"Deep learning",2020.05],[18,0,0,"Reinforcement learning",2020.05],[3,0,0,"Autodrive",2020.05],[6,0,0,"Convolutional Neural Network",2020.06],[75,0,0,"Deep learning",2020.06],[17,0,0,"Reinforcement learning",2020.06],[3,0,0,"Autodrive",2020.06],[5,0,0,"Convolutional Neural Network",2020.07],[74,0,0,"Deep learning",2020.07],[17,0,0,"Reinforcement learning",2020.07],[3,0,0,"Autodrive",2020.07],[5,0,0,"Convolutional Neural Network",2020.08],
+[67,0,0,"Deep learning",2020.08],[14,0,0,"Reinforcement learning",2020.08],[2,0,0,"Autodrive",2020.08],[6,0,0,"Convolutional Neural Network",2020.09],[71,0,0,"Deep learning",2020.09],[17,0,0,"Reinforcement learning",2020.09],[2,0,0,"Autodrive",2020.09],[5,0,0,"Convolutional Neural Network",2020.10],[60,0,0,"Deep learning",2020.10],[16,0,0,"Reinforcement learning",2020.10],[3,0,0,"Autodrive",2020.10],[5,0,0,"Convolutional Neural Network",2020.11],[55,0,0,"Deep learning",2020.11],[16,0,0,"Reinforcement learning",2020.11],[3,0,0,"Autodrive",2020.11],[4,0,0,"Convolutional Neural Network",2020.12],[54,0,0,"Deep learning",2020.12],[15,0,0,"Reinforcement learning",2020.12],[3,0,0,"Autodrive",2020.12],[4,0,0,"Convolutional Neural Network",2021.01],[54,0,0,"Deep learning",2021.01],[14,0,0,"Reinforcement learning",2021.01],[3,0,0,"Autodrive",2021.01],[4,0,0,"Convolutional Neural Network",2021.02],[55,0,0,"Deep learning",2021.02],[16,0,0,"Reinforcement learning",2021.02],[4,0,0,"Autodrive",2021.02],[5,0,0,"Convolutional Neural Network",2021.03],[61,0,0,"Deep learning",2021.03],
+[17,0,0,"Reinforcement learning",2021.03],[3,0,0,"Autodrive",2021.03],[4,0,0,"Convolutional Neural Network",2021.04],[58,0,0,"Deep learning",2021.04],[16,0,0,"Reinforcement learning",2021.04],[3,0,0,"Autodrive",2021.04],[5,0,0,"Convolutional Neural Network",2021.05],[57,0,0,"Deep learning",2021.05],[16,0,0,"Reinforcement learning",2021.05],[3,0,0,"Autodrive",2021.05],[5,0,0,"Convolutional Neural Network",2021.06],[54,0,0,"Deep learning",2021.06],[14,0,0,"Reinforcement learning",2021.06],[3,0,0,"Autodrive",2021.06],[4,0,0,"Convolutional Neural Network",2021.07],[48,0,0,"Deep learning",2021.07],[14,0,0,"Reinforcement learning",2021.07],[3,0,0,"Autodrive",2021.07],[4,0,0,"Convolutional Neural Network",2021.08],[45,0,0,"Deep learning",2021.08],[12,0,0,"Reinforcement learning",2021.08],[3,0,0,"Autodrive",2021.08],[4,0,0,"Convolutional Neural Network",2021.09],[49,0,0,"Deep learning",2021.09],[15,0,0,"Reinforcement learning",2021.09],
+[3,0,0,"Autodrive",2021.09],[4,0,0,"Convolutional Neural Network",2021.10],[52,0,0,"Deep learning",2021.10],[18,0,0,"Reinforcement learning",2021.10],[3,0,0,"Autodrive",2021.10],[5,0,0,"Convolutional Neural Network",2021.11],[57,0,0,"Deep learning",2021.11],[19,0,0,"Reinforcement learning",2021.11],[3,0,0,"Autodrive",2021.11],[5,0,0,"Convolutional Neural Network",2021.12],[55,0,0,"Deep learning",2021.12],[17,0,0,"Reinforcement learning",2021.12],[4,0,0,"Autodrive",2021.12],[7,0,0,"Convolutional Neural Network",2022.01],[81,0,0,"Deep learning",2022.01],[21,0,0,"Reinforcement learning",2022.01],[6,0,0,"Autodrive",2022.01],[7,0,0,"Convolutional Neural Network",2022.02],[87,0,0,"Deep learning",2022.02],[27,0,0,"Reinforcement learning",2022.02],[5,0,0,"Autodrive",2022.02],
+[8,0,0,"Convolutional Neural Network",2022.03],[100,0,0,"Deep learning",2022.03],[26,0,0,"Reinforcement learning",2022.03],[4,0,0,"Autodrive",2022.03],[9,0,0,"Convolutional Neural Network",2022.04],[98,0,0,"Deep learning",2022.04],[25,0,0,"Reinforcement learning",2022.04],[4,0,0,"Autodrive",2022.04],[9,0,0,"Convolutional Neural Network",2022.05],[92,0,0,"Deep learning",2022.05],[24,0,0,"Reinforcement learning",2022.05],[4,0,0,"Autodrive",2022.05],[8,0,0,"Convolutional Neural Network",2022.06],[89,0,0,"Deep learning",2022.06],[22,0,0,"Reinforcement learning",2022.06],[4,0,0,"Autodrive",2022.06],[6,0,0,"Convolutional Neural Network",2022.07],[81,0,0,"Deep learning",2022.07],[21,0,0,"Reinforcement learning",2022.07],[4,0,0,"Autodrive",2022.07],[6,0,0,"Convolutional Neural Network",2022.08],[79,0,0,"Deep learning",2022.08],[22,0,0,"Reinforcement learning",2022.08],[4,0,0,"Autodrive",2022.08]
+]];
+  const flags = res0[0];
+  const data5 = res1[0];
+  const years = [];
+  for (let i = 0; i < data5.length; ++i) {
+    if (years.length === 0 || years[years.length - 1] !== data5[i][4]) {
+      if (String(data5[i][4]).substr(-2,2) === ".1"){
+        data5[i][4]=String(data5[i][4]).concat("0");
+      }
+        years.push(data5[i][4]);
+    }
+  }
+  function getFlag(countryName) {
+    if (!countryName) {
+      return '';
+    }
+    return (
+      flags.find(function (item) {
+        return item.name === countryName;
+      }) || {}
+    ).emoji;
+  }
+  let startIndex = 0;
+  let startYear = years[startIndex];
+  option = {
+    grid: {
+      top: 10,
+      bottom: 30,
+      left: 250,
+      right: 80
+    },
+    xAxis: {
+      max: 'dataMax',
+      axisLabel: {
+        formatter: function (n) {
+          return Math.round(n) + '';
+        }
+      }
+    },
+    dataset: {
+      source: data5.slice(1).filter(function (d) {
+        return d[4] === startYear;
+      })
+    },
+    yAxis: {
+      type: 'category',
+      inverse: true,
+      max: 4,
+      axisLabel: {
+        show: true,
+        fontSize: 14,
+        formatter: function (value) {
+          return value + '{flag|' + '}';
+        },
+        rich: {
+          flag: {
+            fontSize: 25,
+            padding: 5
+          }
+        }
+      },
+      animationDuration: 300,
+      animationDurationUpdate: 300
+    },
+    series: [
+      {
+        realtimeSort: true,
+        seriesLayoutBy: 'column',
+        type: 'bar',
+        itemStyle: {
+          color: function (param) {
+            return countryColors[param.value[3]] || '#5470c6';
+          }
+        },
+        encode: {
+          x: dimension,
+          y: 3
+        },
+        label: {
+          show: true,
+          precision: 1,
+          position: 'right',
+          valueAnimation: true,
+          fontFamily: 'monospace'
+        }
+      }
+    ],
+    // Disable init animation.
+    animationDuration: 0,
+    animationDurationUpdate: updateFrequency1,
+    animationEasing: 'linear',
+    animationEasingUpdate: 'linear',
+    graphic: {
+      elements: [
+        {
+          type: 'text',
+          right: 160,
+          bottom: 60,
+          style: {
+            text: startYear,
+            font: 'bolder 80px monospace',
+            fill: 'rgba(100, 100, 100, 0.25)'
+          },
+          z: 100
+        }
+      ]
+    }
+  };
+  // console.log(option);
+  myChart.setOption(option);
+  for (let i = startIndex; i < years.length - 1; ++i) {
+    (function (i) {
+      setTimeout(function () {
+        updateYear(years[i + 1]);
+      }, (i - startIndex) * updateFrequency1);
+    })(i);
+  }
+  function updateYear(year1) {
+    let source = data5.slice(1).filter(function (d) {
+      return d[4] === year1;
+    });
+    option.series[0].data = source;
+    option.graphic.elements[0].style.text = year1;
+    myChart.setOption(option);
+  }
+});
+    // if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    // }
+    window.addEventListener('resize', myChart.resize);
+  </script>

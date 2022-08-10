@@ -1,0 +1,241 @@
+<meta charset="utf-8">
+  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
+
+  <div id="figure6" style="width: 1200px;height:600px;"></div>
+  <script type="text/javascript">
+    var dom = document.getElementById('figure6');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+  const data_6 = {
+ "name": "概述",
+ "children": [
+  {
+   "name": "深度学习和强化学习算法",
+   "children": [
+    {"name": "CNN"},
+    {"name": "LSTM"},
+    {"name": "RL"}
+   ]
+  },
+  {
+   "name": "自动驾驶",
+   "children": [
+    {
+        "name": "级别",
+        "children": [
+         {
+            "name": "基本概念",
+            "children": [
+                {"name": "DDT：动态驾驶任务"},
+                {"name": "OEDR：目标和事件的监测和响应"},
+                {"name": "DDT Fallback：DDT 接管"},
+                {"name": "ODD：设计运行域"}
+               ]
+        },
+         {
+            "name": "不同等级",
+            "children": [
+                {"name": "L1 级-无自动驾驶"},
+                {"name": "L2 级-半自动驾驶"},
+                {"name": "L3 级别-有条件自动驾驶"},
+                {"name": "L4 级别-高度自动驾驶"},
+                {"name": "L5 级别-完全自动驾驶"}
+               ]
+        }
+        ]
+    },
+    {
+        "name": "硬件技术",
+        "children": [
+      {
+        "name": "定义",
+        "children": [
+            {"name": "摄像头"},
+            {"name": "毫米波雷达"},
+            {"name": "激光雷达"}
+           ]
+    },
+      {
+        "name": "性能对比",
+        "children": [
+            {"name": "范围"},
+            {"name": "空间分辨率"},
+            {"name": "黑暗中的鲁棒性"},
+            {"name": "在雨、雪、雾中的鲁棒性"},
+            {"name": "物体分类"},
+            {"name": "感知二维结构"},
+            {"name": "测量速度"},
+            {"name": "系统成本"},
+            {"name": "包装尺寸"},
+            {"name": "计算要求"}
+           ]
+    }
+     ]
+    },
+    {
+        "name": "安全性",
+        "children": [
+            {"name": "对“安全”的定义"},
+            {"name": "对“事故“的定义"},
+            {"name": "扩大“安全”，提出广泛的安全决策论"},
+            {"name": "为确保安全提出“标准”"},
+            {"name": "扩大“标准”"},
+            {"name": "定义“危险”并作出“评估”"},
+            {"name": "定义“损失函数”与“经验风险”，实现数值化、函数化"},
+            {"name": "理想情况与现实情况在程序和数据集上的差异”"},
+            {"name": "针对现实的差异制定“要求”"},
+            {"name": "故障保护机制"}
+            ]
+    },
+    {
+        "name": "训练数据集",
+        "children": [
+            {"name": "NuScenes"},
+            {"name": "AMUSE"},
+            {"name": "Ford"},
+            {"name": "KITTI"},
+            {"name": "Udacity”"},
+            {"name": "Cityscapes"},
+            {"name": "Oxford"},
+            {"name": "CamVid”"},
+            {"name": "Daimler pedestrian”"},
+            {"name": "Caltec"}
+            ]
+    },
+    {
+        "name": "算力平台与域控制器设计",
+        "children": [
+            {"name": "工控机"},
+            {"name": "Tesla HW3.0"},
+            {"name": "NVIDIA Driver AGX Xavier"},
+            {"name": "NVIDIA Jetson Xavier"},
+            {"name": "华为 MDC”"},
+            {"name": "域控制器设计要求"}
+            ]
+    }
+    ]
+  },
+  {
+   "name": "深度学习和强化学习在自动驾驶的应用",
+   "children": [
+    {
+     "name": "场景认识",
+     "children": [
+        {"name": "场景信息提取"},
+        {"name": "场景信息利用"}
+        ]
+    },
+    {
+        "name": "运动规划",
+        "children": [
+           {"name": "路线规划"},
+           {"name": "行为层"},
+           {"name": "运动规划"}
+           ]
+    },
+    {
+        "name": "控制",
+        "children": [
+           {"name": "学习型控制器"},
+           {"name": "端到端控制"}
+           ]
+    }
+   ]
+  },
+  {
+   "name": "自动驾驶未来发展",
+   "children": [
+    {
+        "name": "挑战",
+        "children": [
+           {"name": "感知方面"},
+           {"name": "短期至中期推理"},
+           {"name": "训练数据的可用性"},
+           {"name": "学习角落案例"},
+           {"name": "基于深度强化学习的控制方法"},
+           {"name": "功能安全"},
+           {"name": "实时计算和通信"}
+           ]
+       },
+       {
+           "name": "在硬件、安全性、数据集和算力平台的预测",
+           "children": [
+              {"name": "硬件方面"},
+              {"name": "安全性方面"},
+              {"name": "数据源"},
+              {"name": "ADS(自动驾驶算力平台)"}
+              ]
+       },
+       {
+           "name": "深度强化学习在自动驾驶领域的未来应用",
+           "children": [
+              {"name": "概述"},
+              {"name": "深度强化学习在自动驾驶仿真测试中的应用"},
+              {"name": "强化学习对自动驾驶研发的影响趋势"}
+              ]
+       },
+       {
+        "name": "自动驾驶中的 BEV 感知",
+        "children": [
+           {"name": "概述"},
+           {"name": "时空融合的必要性"},
+           {"name": "BEVFormer"},
+           {"name": "BEVFormer++：Waymo 纯视觉 3D 检测挑战赛中斩获第一"},
+           {"name": "BEV 后续的发展"}
+           ]
+    }
+   ]
+  },
+  {
+   "name": "结论"
+  }
+ ]
+};
+  myChart.setOption(
+    (option = {
+      tooltip: {
+        trigger: 'item',
+        triggerOn: 'mousemove'
+      },
+      series: [
+        {
+          type: 'tree',
+          data: [data_6],
+          top: '1%',
+          left: '7%',
+          bottom: '1%',
+          right: '40%',
+          symbolSize: 7,
+          label: {
+            position: 'left',
+            verticalAlign: 'middle',
+            align: 'right',
+            fontSize: 14
+          },
+          leaves: {
+            label: {
+              position: 'right',
+              verticalAlign: 'middle',
+              align: 'left'
+            }
+          },
+          emphasis: {
+            focus: 'descendant'
+          },
+          expandAndCollapse: true,
+          animationDuration: 550,
+          animationDurationUpdate: 750
+        }
+      ]
+    })
+  );
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+    window.addEventListener('resize', myChart.resize);
+  </script>

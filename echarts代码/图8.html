@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <div id="figure9" style="width: 1000px;height:800px;"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+
+
+  <script type="text/javascript">
+    var dom = document.getElementById('figure9');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    var data_9 = [
+  {
+    name:'场景信息提取',
+    itemStyle: {
+      color: '#da0d68'
+    },
+    children:[
+      {
+        name:'CNN',
+        value: 1,
+        itemStyle: {
+          color: '#da1d23'
+        },
+      },
+      {
+        name: '单阶段检测器',
+        itemStyle: {
+          color: '#da1d23'
+        },
+        children:[
+          {
+            name: 'YOLO',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'SSD',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'CornerNet',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },
+          {
+            name: 'RefineNet',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          }
+        ]
+      },
+      {
+        name: '双阶段检测器',
+        itemStyle: {
+          color: '#da1d23'
+        },
+        children:[
+          {
+            name: 'RCNN',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'Faster-RCNN',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'R-FCN',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          }
+        ]
+      },
+      {
+        name: '嵌入式优化检测器',
+        itemStyle: {
+          color: '#da1d23'
+        },
+        children:[
+          {
+            name: 'SqueezeNet',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'li2018efficient',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          }
+        ]
+      },
+      {
+        name: '三维感官检测器',
+        itemStyle: {
+          color: '#da1d23'
+        },
+        children:[
+          {
+            name: 'Frustun PointNet',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'VoxelNet',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'PointNet',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'MV3D',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          },  
+          {
+            name: 'RoarNet',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          }
+        ]
+      },
+      {
+        name: 'LiDAR专用检测器',
+        itemStyle: {
+          color: '#da1d23'
+        },
+        children:[
+          {
+            name: 'AVOD',
+            value: 1,
+            itemStyle: {
+              color: '#e0719c'
+            }
+          }
+        ]
+      },
+      {
+        name: 'DRL',
+        value:1,
+        itemStyle: {
+          color: '#da1d23'
+        }
+      }
+      
+    ]
+      
+  },
+  {
+    name: '场景信息利用',
+    itemStyle: {
+      color: '#ebb40f'
+    },
+    children: [
+      {
+        name: '语义分割',
+        itemStyle: {
+          color: '#e1c315'
+        },
+        children: [
+          {
+            name: 'Segment',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'ICNet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'ICNet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'ENet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'AdapNet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'Mask R-CNN',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'AlexNet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'VGG-16',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'GoogLeNet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'ResNet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          }
+        ]
+      },
+      {
+        name: '定位算法(神经网络)',
+        itemStyle: {
+          color: '#e1c315'
+        },
+        children: [
+          {
+            name: 'barnes2018driven',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'PoseNet',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'VLocNet++',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'walch2017image',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'melekhov2017image',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'laskar2017camera',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'brachmann2018learning',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'sarlin2018leveraging',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'radwan2018vlocnet++',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          }
+        ]
+      },
+      {
+        name: '基于LiDAR的定位',
+        itemStyle: {
+          color: '#e1c315'
+        },
+        children: [
+          {
+            name: 'barsan2020learning',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'garcia2009laser',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          },
+          {
+            name: 'ushani2018feature',
+            value: 1,
+            itemStyle: {
+              color: '#9ea718'
+            }
+          }
+        ]
+      },
+      {
+        name: 'DRL',
+        value:1,
+        itemStyle: {
+          color: '#e1c315'
+        }
+      }
+    ]
+  },
+  {
+    name: '行动规划',
+    itemStyle: {
+      color: '#187a2f'
+    },
+    children: [
+      {
+        name: '路线规划',
+        itemStyle: {
+          color: '#3aa255'
+        },
+        children: [
+          {
+            name: 'IL',
+            value: 1,
+            itemStyle: {
+              color: '#62aa3c'
+            }
+          },
+          {
+            name: 'DRL',
+            value: 1,
+            itemStyle: {
+              color: '#62aa3c'
+            }
+          }
+        ]
+      },
+      {
+        name: '行为层',
+        itemStyle: {
+          color: '#3aa255'
+        },
+        children: [
+          {
+            name: 'wiest2012probabilistic',
+            value: 1,
+            itemStyle: {
+              color: '#62aa3c'
+            }
+          },
+          {
+            name: 'dou2016lane',
+            value: 1,
+            itemStyle: {
+              color: '#62aa3c'
+            }
+          }
+        ]
+      },
+      {
+        name: '运动规划',
+        itemStyle: {
+          color: '#3aa255'
+        },
+        children: [
+          {
+            name: 'PSPACE',
+            value: 1,
+            itemStyle: {
+              color: '#62aa3c'
+            }
+          },
+          {
+            name: 'DRL',
+            value: 1,
+            itemStyle: {
+              color: '#62aa3c'
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    name: '汽车控制',
+    itemStyle: {
+      color: '#0aa3b5'
+    },
+    children: [
+      {
+        name: 'RL控制器',
+        itemStyle: {
+          color: '#76c0cb'
+        },
+        children: [
+          {
+            name: 'LQR',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'ILQR',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          }
+        ]
+      },
+      {
+        name: '学习型控制器',
+        itemStyle: {
+          color: '#76c0cb'
+        },
+        children: [
+          {
+            name: 'ILC',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'MPC',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          }
+        ]
+      },
+      {
+        name: '端到端控制',
+        itemStyle: {
+          color: '#76c0cb'
+        },
+        children: [
+          {
+            name: 'ALVINN',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'DRL',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'PilotNet',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'FCN-LSTM',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'C-LSTM',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          },
+          {
+            name: 'Tesla®',
+            value: 1,
+            itemStyle: {
+              color: '#80a89d'
+            }
+          }
+        ]
+      }
+      
+    ]
+  }
+];
+option = {
+  title: {
+    text: '',
+    subtext: ' ',
+    textStyle: {
+      fontSize: 14,
+      align: 'center'
+    },
+    subtextStyle: {
+      align: 'center'
+    },
+    sublink: 'https://worldcoffeeresearch.org/work/sensory-lexicon/'
+  },
+  series: {
+    type: 'sunburst',
+    data: data_9,
+    radius: [0, '95%'],
+    sort: undefined,
+    emphasis: {
+      focus: 'ancestor'
+    },
+
+    levels: [
+      {},
+      {
+        r0: '15%',
+        r: '35%',
+        itemStyle: {
+          borderWidth: 2
+        },
+        label: {
+          rotate: 'tangential'
+        }
+      },
+      {
+        r0: '35%',
+        r: '70%',
+        label: {
+          align: 'right'
+        }
+      },
+      {
+        r0: '70%',
+        r: '72%',
+        label: {
+          position: 'outside',
+          padding: 3,
+          silent: false
+        },
+        itemStyle: {
+          borderWidth: 3
+        }
+      }
+    ]
+  }
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

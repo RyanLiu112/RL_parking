@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+
+</head>
+<body>
+  <div id="figure1" style="width: 1000px;height:500px;"></div>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <script type="text/javascript">
+    var dom = document.getElementById('figure1');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var option;
+    option = {
+  title: {
+    text: '',
+    left: 'center',
+    top: 'bottom',
+  },
+  legend: {
+    data: ['摄像头', '毫米波雷达','激光雷达']
+  },
+  radar: {
+    // shape: 'circle',
+    splitNumber: 10, // 雷达图圈数设置
+    splitNumber: 3,
+    indicator: [
+      { name: '近距离检测', max: 30 },
+      { name: '远距离检测', max: 30 },
+      { name: '黑暗中的鲁棒性', max: 30 },
+      { name: '恶劣天气下的鲁棒性', max: 30 },
+      { name: '多物体分类', max: 30 },
+      { name: '感知二维结构', max: 30 },
+      { name: '测量速度', max: 30 },
+      { name: '系统成本', max: 30 },
+      { name: '体积', max: 30 },
+      { name: '计算', max: 30 }
+    ]
+  },
+  series: [
+    {
+      name: '自动驾驶领域的硬件性能比较',
+      type: 'radar',
+      data: [
+        {
+          value: [20, 20, 20, 20, 30, 30, 20, 30, 30, 20],
+          name: '摄像头'
+        },
+        {
+          value: [30, 30, 30, 30,  0,  0, 30, 30, 30, 30],
+          name: '毫米波雷达'
+        },
+        {
+          value: [20, 30, 30, 20, 20,  0, 20, 20, 20, 30],
+          name: '激光雷达'
+        }
+      ]
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
