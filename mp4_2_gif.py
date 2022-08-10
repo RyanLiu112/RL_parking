@@ -2,10 +2,9 @@ import os
 import moviepy.editor as mpy
 
 
-for task in range(1, 6):
+for task in range(1, 7):
     path = './log/gif'
     filename = f'DQN_{task}.mp4'
-    # task = filename[4]
 
     filepath = os.path.join(path, filename)
     gif_filepath = os.path.join(path, filename.replace('.mp4', '.gif'))
