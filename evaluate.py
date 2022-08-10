@@ -11,9 +11,6 @@ from stable_baselines3.common.evaluation import evaluate_policy
 parser = argparse.ArgumentParser()
 parser.add_argument('--env', type=str, default="parking_env-v0", help='name of the environment to run')
 parser.add_argument('--render', type=bool, default=True, help='render the environment')
-parser.add_argument('--seed', type=int, default=0, help='random seed (default: 0)')
-parser.add_argument('--total_timesteps', type=int, default=int(2e6), help='total timesteps to run')
-parser.add_argument('--save_freq', type=int, default=int(5e5), help='checkpoint save frequency')
 parser.add_argument('--ckpt_path', type=str, default='', help='checkpoint path')
 parser.add_argument('--mode', type=str, default='1', choices=['1', '2', '3', '4', '5', '6'], help='mode')
 
