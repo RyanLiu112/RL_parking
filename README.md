@@ -56,6 +56,8 @@
 - 目标：小车从任意点出发，车头方向随机，倒车过程中不能碰撞墙壁和车位旁的小车，实现倒车入库。
 - 效果：
 
+<img src="./imgs/DQN_6.gif" alt="DQN_6"  />
+
 
 
 ## RL Definition
@@ -66,6 +68,9 @@
 
 状态是一个6维向量，分别为小车的x坐标、y坐标、x方向线速度、y方向线速度、与x方向夹角余弦值、与y方向夹角余弦值。
 
+$$
+\text{observation = [position\_x, position\_y, velocity\_x, velocity\_y, cos(angle), sin(angle)]}
+$$
 
 
 ### 2. Action
@@ -76,8 +81,10 @@
 
 ### 3. Reward
 
-对于大部分状态-动作对，我们定义 reward = -sqrt(小车当前状态 - 目标状态)。
-
+对于大部分状态-动作对，我们定义如下 reward：
+$$
+\text{reward} = -\sqrt{\text{observation} - \text{goal}}
+$$
 当小车碰撞到墙壁或其他小车时，定义 reward = -500。
 
 
@@ -92,28 +99,20 @@
 
 - 克隆本项目
 
-```
+```shell
 git clone https://github.com/RyanLiu112/RL_parking
 ```
 
 - 进入项目目录
 
-```
+```shell
 cd RL_parking
 ```
 
-- 安装停车环境（会同时安装gym、pybullet、stable-baselines3等第三方库）
+- 安装停车环境（会同时安装gym、pybullet、stable-baselines3、torch、moviepy等第三方库）
 
-```
+```shell
 pip install -e parking_env
-```
-
-
-
-## How to play in the environment
-
-```
-python play.py --mode=1
 ```
 
 
@@ -132,37 +131,37 @@ python play.py --mode=1
 
 - 任务1：垂直倒车入库
 
-```
+```shell
 python dqn_agent.py --mode=1
 ```
 
 - 任务2：侧方位-垂直倒车入库
 
-```
+```shell
 python dqn_agent.py --mode=2
 ```
 
 - 任务3：侧方位-垂直倒车入库（车位旁边有小车）
 
-```
+```shell
 python dqn_agent.py --mode=3
 ```
 
 - 任务4：侧方位-平行倒车入库
 
-```
+```shell
 python dqn_agent.py --mode=4
 ```
 
 - 任务5：斜方位-60度倒车入库
 
-```
+```shell
 python dqn_agent.py --mode=5
 ```
 
 - 任务6：任意位置出发倒车入库（车位旁边有小车）
 
-```
+```shell
 python dgn_agent.py --mode=6
 ```
 
@@ -170,7 +169,7 @@ python dgn_agent.py --mode=6
 
 ### 2. 使用 SAC 和 HER 算法训练（使用 highway-env 环境）
 
-```
+```shell
 python sac_her_agent.py
 ```
 
@@ -178,8 +177,45 @@ python sac_her_agent.py
 
 ## How to evaluate
 
-```
+```shell
 python evaluate.py --mode=1
+```
+
+
+
+## How to play in the environment
+
+```shell
+python play.py --mode=1
+```
+
+
+
+## How to render videos
+
+### 1. 小车测试视频
+
+```shell
+# 需指定 mode 和 ckpt_path
+python render_video.py --mode=mode -ckpt_path=ckpt_path
+```
+
+
+
+### 2. 小车训练视频
+
+```shell
+# 需指定 mode 和 ckpt_path
+python render_training_video.py --mode=mode -ckpt_path=ckpt_path
+```
+
+
+
+### 3. 环境视频
+
+```shell
+# 需指定 mode
+python render_env_video.py --mode=mode
 ```
 
 
