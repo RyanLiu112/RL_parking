@@ -186,13 +186,12 @@ python evaluate.py --mode=1
 
 ## References
 
-[1] Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., & Riedmiller, M. (2013). Playing atari with deep reinforcement learning. *arXiv preprint arXiv:1312.5602*.
+[1] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan Wierstra, and Martin Riedmiller. Playing atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602, 2013.
 
-[2] Raffin, A., Hill, A., Gleave, A., Kanervisto, A., Ernestus, M., & Dormann, N. (2021). Stable-baselines3: Reliable reinforcement learning implementations. *Journal of Machine Learning Research*.
+[2] Antonin Raffin, Ashley Hill, Adam Gleave, Anssi Kanervisto, Maximilian Ernestus, and Noah Dormann. Stable-baselines3: Reliable reinforcement learning implementations. Journal of Machine Learning Research, 2021.
 
-[3] Coumans, E., & Bai, Y. (2016). Pybullet, a python module for physics simulation for games, robotics and machine learning. http://pybullet.org
+[3] Erwin Coumans and Yunfei Bai. Pybullet, a python module for physics simulation for games, robotics and machine learning. http://pybullet.org, 2016–2021.
 
-[4] Gupta, A., Venkatraman, V., Kumar Gond, P., Keshri, A., Krishna, L., & Sai, N. (2020). gym-carpark. https://github.com/Robotics-Club-IIT-BHU/gym-carpark
+[4] Ajasra Gupta, Vikhyath Venkatraman, Prince Kumar Gond, Amarjeet Keshri, Lokesh Krishna, and Niranth Sai. gym-carpark. https://github.com/Robotics-Club-IIT-BHU/gym-carpark, 2020.
 
-[5] Leurent, E. (2018). An Environment for Autonomous Driving Decision-Making. https://github.com/eleurent/highway-env
-
+[5] Edouard Leurent. An environment for autonomous driving decision-making. https://github.com/eleurent/highway-env, 2018.
