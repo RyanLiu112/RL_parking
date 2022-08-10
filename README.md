@@ -178,7 +178,8 @@ python sac_her_agent.py
 ## How to evaluate
 
 ```shell
-python evaluate.py --mode=1
+# 需指定 mode 和 ckpt_path
+python evaluate.py --mode=mode --ckpt_path=ckpt_path
 ```
 
 
@@ -186,7 +187,7 @@ python evaluate.py --mode=1
 ## How to play in the environment
 
 ```shell
-python play.py --mode=1
+python play.py
 ```
 
 
@@ -197,7 +198,7 @@ python play.py --mode=1
 
 ```shell
 # 需指定 mode 和 ckpt_path
-python render_video.py --mode=mode -ckpt_path=ckpt_path
+python render_video.py --mode=mode --ckpt_path=ckpt_path
 ```
 
 
@@ -206,7 +207,7 @@ python render_video.py --mode=mode -ckpt_path=ckpt_path
 
 ```shell
 # 需指定 mode 和 ckpt_path
-python render_training_video.py --mode=mode -ckpt_path=ckpt_path
+python render_training_video.py --mode=mode --ckpt_path=ckpt_path
 ```
 
 
