@@ -4,3 +4,5 @@ parking_env/parking_env.egg-info/
 *.pyc
 *.zip
 log/
+*.mp4
+*.json
