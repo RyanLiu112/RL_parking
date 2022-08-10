@@ -174,6 +174,20 @@ python sac_her_agent.py
 
 
 
+### 3. Tensorboard 可视化曲线
+
+#### 任务6
+
+- mean episode reward
+
+<img src="./imgs/tb_reward.png" alt="tb_reward"  />
+
+- success rate
+
+<img src="./imgs/tb_success.png" alt="tb_success"  />
+
+
+
 ## How to evaluate
 
 ```shell
