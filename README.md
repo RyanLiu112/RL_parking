@@ -1,6 +1,6 @@
 # RL parking
 
-基于DQN、A2C等算法实现模拟小车倒车入库，强化学习算法使用stable-baselines3实现，倒车环境
+基于DQN算法实现模拟小车倒车入库，强化学习算法使用stable-baselines3实现，小车和倒车环境基于pybullet实现。
 
 
 
@@ -8,7 +8,7 @@
 
 ### 1. 垂直倒车入库
 
-- 目标：小车从车位前出发，小车方向与车位方向对齐，实现垂直倒车入库，倒车过程中不能碰撞墙壁。
+- 目标：小车从车位前出发，车头方向与车位方向对齐，倒车过程中不能碰撞墙壁，实现垂直倒车入库。
 - 效果：
 
 <img src="./imgs/DQN_1.gif" alt="DQN_1"  />
@@ -17,7 +17,7 @@
 
 ### 2. 侧方位-垂直倒车入库
 
-- 目标：小车从环境中心点 [0, 0] 出发，车头方向与车位垂直，实现倒车入库，倒车过程中不能碰撞墙壁。
+- 目标：小车从 [0, 0] 出发，车头方向与车位垂直，倒车过程中不能碰撞墙壁，实现倒车入库。
 - 效果：
 
 <img src="./imgs/DQN_2.gif" alt="DQN_2"  />
@@ -26,7 +26,7 @@
 
 ### 3. 侧方位-垂直倒车入库（车位旁边有小车）
 
-- 目标：小车从环境中心点 [0, 0] 出发，车头方向与车位垂直，实现倒车入库，倒车过程中不能碰撞墙壁和车位旁的小车。
+- 目标：小车从 [0, 0] 出发，车头方向与车位垂直，倒车过程中不能碰撞墙壁和车位旁的小车，实现倒车入库。
 - 效果：
 
 <img src="./imgs/DQN_3.gif" alt="DQN_3"  />
@@ -35,7 +35,7 @@
 
 ### 4. 侧方位-平行倒车入库
 
-- 目标：小车从环境中心点 [0, 0] 出发，车头方向与车位平行，实现倒车入库，倒车过程中不能碰撞墙壁。
+- 目标：小车从 [0, 0] 出发，车头方向与车位平行，倒车过程中不能碰撞墙壁，实现倒车入库。
 - 效果：
 
 <img src="./imgs/DQN_4.gif" alt="DQN_4"  />
@@ -44,7 +44,7 @@
 
 ### 5. 斜方位-60度倒车入库
 
-- 目标：小车从环境中心点 [0, 0] 出发，车头方向与车位成 60 度角，实现倒车入库，倒车过程中不能碰撞墙壁。
+- 目标：小车从 [0, 0] 出发，车头方向与车位成 60 度角，倒车过程中不能碰撞墙壁，实现倒车入库。
 - 效果：
 
 <img src="./imgs/DQN_5.gif" alt="DQN_5"  />
@@ -53,7 +53,7 @@
 
 ### 6. 任意位置出发倒车入库（车位旁边有小车）
 
-- 目标：小车从环境任意点出发，车头方向随机，实现倒车入库，倒车过程中不能碰撞墙壁和车位旁的小车。
+- 目标：小车从任意点出发，车头方向随机，倒车过程中不能碰撞墙壁和车位旁的小车，实现倒车入库。
 - 效果：
 
 
@@ -62,13 +62,29 @@
 
 ### 1. Observation
 
+我们定义环境中心点为 [0, 0]，使用pybullet实时获取小车的坐标、速度和方向等信息，作为小车当前的状态。
+
+状态是一个6维向量，分别为小车的x坐标、y坐标、x方向线速度、y方向线速度、与x方向夹角余弦值、与y方向夹角余弦值。
+
 
 
 ### 2. Action
 
+小车可以执行4种动作：前进、后退、左转、右转，使用pybullet在环境中模拟小车的运动。
+
 
 
 ### 3. Reward
+
+对于大部分状态-动作对，我们定义 reward = -sqrt(小车当前状态 - 目标状态)。
+
+当小车碰撞到墙壁或其他小车时，定义 reward = -500。
+
+
+
+### 4. Episode
+
+我们设定回合长度为500，但当小车碰撞到墙壁或其他小车时，终止回合。
 
 
 
@@ -104,7 +120,15 @@ python play.py --mode=1
 
 ## How to train
 
-### 1. 使用DQN算法训练小车停车智能体
+### 1. 使用 DQN 算法训练
+
+在算法方面，我们选择了适用于离散动作空间的经典算法——DQN (Deep Q Network)。DQN是一种基于Q-learning的off-policy强化学习算法，使用replay buffer存放智能体在环境中探索得到的经验。
+
+我们使用强化学习领域目前最为优秀的开源库stable-baselines3进行训练，10行代码即可训练强化学习智能体。同时，stable-baselines3支持向量化环境，训练速度较快，使用cpu即可快速完成训练。其中，任务1-5训练了2百万步，任务6训练了5百万步。
+
+通过训练过程可以发现，前期小车有较高的探索概率，在环境中不断试错，根据试错经验进行学习，后期小车探索率降低，能够以较高的成功率完成停车过程。任务6在2百万步后，小车基本上达到了从任意点出发都可以停到目标车位的效果。
+
+#### 各任务训练命令
 
 - 任务1：垂直倒车入库
 
@@ -130,7 +154,7 @@ python dqn_agent.py --mode=3
 python dqn_agent.py --mode=4
 ```
 
-- 任务5：斜方位-30度倒车入库
+- 任务5：斜方位-60度倒车入库
 
 ```
 python dqn_agent.py --mode=5
@@ -144,6 +168,16 @@ python dgn_agent.py --mode=6
 
 
 
+### 2. 使用 SAC 和 HER 算法训练（使用 highway-env 环境）
+
+```
+python sac_her_agent.py
+```
+
+
+
+
+
 ## How to evaluate
 
 ```
@@ -152,5 +186,15 @@ python evaluate.py --mode=1
 
 
 
+## References
 
+[1] Mnih, V., Kavukcuoglu, K., Silver, D., Graves, A., Antonoglou, I., Wierstra, D., & Riedmiller, M. (2013). Playing atari with deep reinforcement learning. *arXiv preprint arXiv:1312.5602*.
+
+[2] Raffin, A., Hill, A., Gleave, A., Kanervisto, A., Ernestus, M., & Dormann, N. (2021). Stable-baselines3: Reliable reinforcement learning implementations. *Journal of Machine Learning Research*.
+
+[3] Coumans, E., & Bai, Y. (2016). Pybullet, a python module for physics simulation for games, robotics and machine learning. http://pybullet.org
+
+[4] Gupta, A., Venkatraman, V., Kumar Gond, P., Keshri, A., Krishna, L., & Sai, N. (2020). gym-carpark. https://github.com/Robotics-Club-IIT-BHU/gym-carpark
+
+[5] Leurent, E. (2018). An Environment for Autonomous Driving Decision-Making. https://github.com/eleurent/highway-env
 
