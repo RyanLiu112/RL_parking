@@ -115,11 +115,10 @@ class CustomEnv(gym.GoalEnv):
 
         """
 
-        # reset function to be made for muliple-agents
         p.resetSimulation(self.client)
         p.setGravity(0, 0, -10)
 
-        # new Loading the plane
+        # 加载地面
         self.ground = p.loadURDF(os.path.join(self.base_path, "assets/arena_new.urdf"), basePosition=[0, 0, 0.005], useFixedBase=10)
 
         p.addUserDebugLine([-3.5, -3.5, 0.02], [-3.5, 3.5, 0.02], [0.75, 0.75, 0.75], 5)
@@ -189,12 +188,6 @@ class CustomEnv(gym.GoalEnv):
         p.addUserDebugLine([1.4, -1.6, 0.02], [2.0, -2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
         p.addUserDebugLine([2.5, -1.6, 0.02], [3.1, -2.7, 0.02], [0.98, 0.98, 0.98], 2.5)
 
-        # 起始点
-        # p.addUserDebugLine([-0.2, -0.2, 0.02], [-0.2, 0.2, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([-0.2, -0.2, 0.02], [0.2, -0.2, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([0.2, 0.2, 0.02], [-0.2, 0.2, 0.02], [0.98, 0.98, 0.98], 2.5)
-        # p.addUserDebugLine([0.2, 0.2, 0.02], [0.2, -0.2, 0.02], [0.98, 0.98, 0.98], 2.5)
-
         basePosition = [0, 0, 0.2]
         if self.mode == '1':
             self.goal = np.array([3.8 / 2, 4.2 / 2])
@@ -228,7 +221,6 @@ class CustomEnv(gym.GoalEnv):
                     continue
                 else:
                     break
-            # print(f'ori: {self.start_orientation[2]}, {random_x}, {random_y}')
             basePosition = [random_x, random_y, 0.2]
 
         self.desired_goal = np.array([self.goal[0], self.goal[1], 0.0, 0.0, np.cos(self.target_orientation), np.sin(self.target_orientation)])
@@ -417,20 +409,20 @@ class Car:
         :param action: 动作
         """
 
-        velocity = self.max_velocity  # rad/s
-        force = self.max_force  # Newton
+        velocity = self.max_velocity
+        force = self.max_force
 
-        if action == 0:  # forward
+        if action == 0:  # 前进
             for i in range(self.action_steps):
                 for joint in range(2, 6):
                     p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=velocity, force=force)
                 p.stepSimulation()
-        elif action == 1:  # back
+        elif action == 1:  # 后退
             for i in range(self.action_steps):
                 for joint in range(2, 6):
                     p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=-velocity, force=force)
                 p.stepSimulation()
-        elif action == 2:  # left
+        elif action == 2:  # 左转
             targetVel = 3
             for i in range(self.action_steps):
                 for joint in range(2, 6):
@@ -441,7 +433,7 @@ class Car:
                         p.setJointMotorControl2(self.car, 2 * joint, p.VELOCITY_CONTROL, targetVelocity=-targetVel,
                                                 force=force)
                     p.stepSimulation()
-        elif action == 3:  # right
+        elif action == 3:  # 右转
             targetVel = 3
             for i in range(self.action_steps):
                 for joint in range(2, 6):
@@ -452,7 +444,7 @@ class Car:
                         p.setJointMotorControl2(self.car, 2 * joint + 1, p.VELOCITY_CONTROL,
                                                 targetVelocity=-targetVel, force=force)
                     p.stepSimulation()
-        elif action == 4:  # stop
+        elif action == 4:  # 停止
             targetVel = 0
             for joint in range(2, 6):
                 p.setJointMotorControl2(self.car, joint, p.VELOCITY_CONTROL, targetVelocity=targetVel,
