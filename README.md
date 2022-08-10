@@ -176,8 +176,6 @@ python sac_her_agent.py
 
 
 
-
-
 ## How to evaluate
 
 ```
