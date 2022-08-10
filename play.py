@@ -7,7 +7,7 @@ import pybullet as p
 parser = argparse.ArgumentParser()
 parser.add_argument('--env', type=str, default="parking_env-v0", help='name of the environment to run')
 parser.add_argument('--render', type=bool, default=True, help='render the environment')
-parser.add_argument('--mode', type=str, default='1', choices=['1', '2', '3', '4', '5'], help='mode')
+parser.add_argument('--mode', type=str, default='1', choices=['1', '2', '3', '4', '5', '6'], help='mode')
 
 args = parser.parse_args()
 
