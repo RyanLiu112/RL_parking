@@ -2,6 +2,13 @@
 
 基于DQN算法实现模拟小车倒车入库，强化学习算法使用stable-baselines3实现，小车和倒车环境基于pybullet实现。
 
+## Links
+
+- 强化学习算法、小车代码：https://github.com/RyanLiu112/RL_parking
+- echarts代码：https://github.com/RyanLiu112/RL_parking/tree/main/echarts%E4%BB%A3%E7%A0%81
+- PDF版论文：https://github.com/RyanLiu112/RL_parking/blob/main/%E8%87%AA%E5%8A%A8%E9%A9%BE%E9%A9%B6%E4%B8%AD%E7%9A%84%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%92%8C%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E7%BB%BC%E8%BF%B0.pdf
+- 网页版论文及echarts可视化：http://101.43.218.18/index.php/2022/08/08/%e8%ae%ba%e6%96%87/
+
 
 
 ## Tasks
